@@ -53,7 +53,6 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
     type: "WIDGET",
     item: { id: widget.id },
     end: (item: { id: string }, monitor: DragSourceMonitor) => {
-      // Specify the type for monitor
       if (monitor.didDrop()) {
         onDrop(item.id);
       }
