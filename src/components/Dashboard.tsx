@@ -71,11 +71,11 @@ const Dashboard = () => {
 
   return (
     <div className="p-8 bg-background min-h-screen w-full flex">
-      {/* Sidebar */}
-      <Sidebar availableWidgets={availableWidgets} />
+      {/* Show Sidebar only in edit mode */}
+      {isEditing && <Sidebar availableWidgets={availableWidgets} />}
 
       {/* Dashboard */}
-      <div className="w-3/4 p-4" ref={drop} style={{ border: "1px solid #ccc" }}>
+      <div className={`p-4 ${isEditing ? 'w-3/4' : 'w-full'}`} ref={drop} style={{ border: "1px solid #ccc" }}>
         <button
           onClick={() => setIsEditing((prev) => !prev)}
           className="mb-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"

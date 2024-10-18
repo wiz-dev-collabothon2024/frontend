@@ -35,7 +35,7 @@ const SidebarWidget = ({ id, title, content, footer }) => {
 
 const Sidebar = ({ availableWidgets }) => {
   return (
-    <div className="w-1/4 p-4 bg-gray-100" style={{ borderRight: "1px solid #ccc" }}>
+    <div className="w-1/4 p-4 bg-card" style={{ borderRight: "1px solid #ccc" }}>
       <h3 className="mb-4">Available Widgets</h3>
       {availableWidgets.map((widget) => (
         <SidebarWidget
