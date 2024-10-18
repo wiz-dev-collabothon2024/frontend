@@ -1,0 +1,30 @@
+.dashboard-container {
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.widget {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.widget-remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: red;
+}
+
+.widget-handle {
+  cursor: move;
+  padding: 10px;
+  background-color: #4a90e2;
+  color: white;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}

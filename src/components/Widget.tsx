@@ -1,21 +1,22 @@
 import React from "react";
-import "../globals.css"; // Adjust the path according to your project structure
 
 interface WidgetProps {
-  className: string;
-
   title: string;
-
-  content: string;
-
-  children: React.ReactNode;
+  content: React.ReactNode;
+  footer?: string;
+  icon?: React.ReactNode;
 }
 
-const Widget: React.FC<WidgetProps> = ({ title, content }) => {
+const Widget: React.FC<WidgetProps> = ({ title, content, footer, icon }) => {
   return (
-    <div className="m-2 rounded-xl w-auto overflow-hidden shadow-lg p-4">
-      <h1 className="font-bold text-xl mb-2">{title}</h1>
-      <p className="text-gray-700 text-base">{content}</p>
+    <div className="flex-grow flex-shrink basis-1 p-6 m-4 w-auto rounded-lg border bg-card text-card-foreground shadow-sm">
+      <div className="flex items-center space-x-4 mb-4">
+        {icon && <div className="text-4xl">{icon}</div>}
+        <h3 className="text-xl font-semibold">{title}</h3>
+      </div>
+      <div className=" mb-4">{content}</div>
+
+      {footer && <div className="text-sm text-primary">{footer}</div>}
     </div>
   );
 };

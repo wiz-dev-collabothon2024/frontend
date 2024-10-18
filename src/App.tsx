@@ -1,11 +1,11 @@
-import Widget from "./components/Widget";
+import Dashboard from "./components/Dashboard";
 import "./globals.css";
 
 function App() {
   return (
-    <div className="dashboard">
+    <div className="bg-background">
       {/* Header Section */}
-      <header className="flex justify-between bg-teal-600 mb-4">
+      <header className="flex justify-between bg-secondary">
         <div className="logo">COMMERZBANK</div>
         <nav>
           <ul className=" ">
@@ -19,28 +19,9 @@ function App() {
           <span>photoTAN</span>
         </div>
       </header>
-      <h1 className="w-auto m-auto text-center text-2xl">Your widgets</h1>
+      <h1 className="w-auto m-auto p-8 text-center text-2xl">Your widgets</h1>
       {/* Widget Layout Section */}
-      <div className="grid grid-cols-5 grid-flow-row gap-1 p-4 w-1/2 m-auto">
-        <Widget className=" p-4" title="Widget" content="Some content">
-          Item 1
-        </Widget>
-        <Widget className=" p-4" title="Widget" content="Some content">
-          Item 2
-        </Widget>
-        <Widget className=" p-4" title="Widget" content="Some content">
-          Item 3
-        </Widget>
-        <Widget className=" p-4" title="Widget" content="Some content">
-          Item 4
-        </Widget>
-        <Widget className=" p-4" title="Widget" content="Some content">
-          Item 5
-        </Widget>
-        <Widget className=" p-4" title="Widget" content="Some content">
-          Item 6
-        </Widget>
-      </div>
+      <Dashboard />
 
       {/* Main Overview Section */}
     </div>

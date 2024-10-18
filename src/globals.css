@@ -55,3 +55,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+.widget-handle {
+  cursor: move;
+  padding: 10px;
+  background-color: #4a90e2;
+  color: white;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
