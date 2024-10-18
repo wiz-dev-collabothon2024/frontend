@@ -7,6 +7,11 @@ import "react-resizable/css/styles.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
+// Draggable item types
+const ItemTypes = {
+  WIDGET: "widget",
+};
+
 interface LayoutItem {
   i: string;
   x: number;
