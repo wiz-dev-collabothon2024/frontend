@@ -1,66 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import Widget from "./Widget";
+import { useDrop } from "react-dnd";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-const Dashboard = () => {
-  const layout = [
-    { i: "users", x: 0, y: 0, w: 2, h: 4, minW: 2, minH: 4 },
-    { i: "revenue", x: 2, y: 0, w: 2, h: 4, minW: 2, minH: 4 },
-    { i: "notifications", x: 4, y: 0, w: 2, h: 4, minW: 2, minH: 4 },
-    { i: "performance", x: 0, y: 2, w: 4, h: 4, minW: 2, minH: 4 },
-  ];
+interface LayoutItem {
+  i: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
 
-  const layouts = {
-    lg: layout,
-    md: layout,
-    sm: layout,
-    xs: layout,
-    xxs: layout,
+const Dashboard: React.FC = () => {
+  const [layout, setLayout] = useState<LayoutItem[]>([]);
+
+  const [, drop] = useDrop(() => ({
+    accept: "WIDGET",
+    drop: (item: { id: string }) => {
+      const newLayout: LayoutItem = {
+        i: item.id,
+        x: layout.length % 12, // Simple logic to place the widget
+        y: Math.floor(layout.length / 12), // Move to the next row after 12 widgets
+        w: 2,
+        h: 4,
+      };
+      setLayout((prev) => [...prev, newLayout]);
+    },
+  }));
+
+  const handleLayoutChange = (newLayout: LayoutItem[]) => {
+    setLayout(newLayout);
   };
 
   return (
-    <div className="p-8 bg-background min-h-screen w-1/2 m-auto">
+    <div ref={drop} className="p-8 bg-gray-100 min-h-screen w-full">
       <ResponsiveGridLayout
         className="layout"
-        layouts={layouts}
-        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 12, md: 10, sm: 8, xs: 4, xxs: 2 }}
+        layouts={{ lg: layout }}
+        breakpoints={{ lg: 1200 }}
+        cols={{ lg: 12 }}
         rowHeight={30}
         isDraggable={true}
         isResizable={true}
+        onLayoutChange={handleLayoutChange} // Handle layout changes
       >
-        <div key="users">
-          <Widget
-            title="Users"
-            content="1,234 Users"
-            footer="Updated 10 mins ago"
-          />
-        </div>
-        <div key="revenue" style={{ width: "100%", height: "100%" }}>
-          <Widget
-            title="Revenue"
-            content="$12,345"
-            footer="Updated 5 mins ago"
-          />
-        </div>
-        <div key="notifications" style={{ width: "100%", height: "100%" }}>
-          <Widget
-            title="Notifications"
-            content="3 new notifications"
-            footer="Updated 20 mins ago"
-          />
-        </div>
-        <div key="performance" style={{ width: "100%", height: "100%" }}>
-          <Widget
-            title="Performance"
-            content="Good Performance"
-            footer="Last updated: 1 hour ago"
-          />
-        </div>
+        {layout.map((item) => (
+          <div key={item.i}>
+            <Widget title={item.i} content={`Content for ${item.i}`} />
+          </div>
+        ))}
       </ResponsiveGridLayout>
     </div>
   );
