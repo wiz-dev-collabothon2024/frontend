@@ -23,52 +23,45 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen flex justify-center">
-      <div className="w-1/2">
-        {" "}
-        {/* Set the grid to take half of the screen width */}
-        <ResponsiveGridLayout
-          className="layout"
-          layouts={layouts}
-          breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-          cols={{ lg: 12, md: 10, sm: 8, xs: 4, xxs: 2 }}
-          rowHeight={30}
-          isDraggable={true}
-          isResizable={true}
-          compactType={null} // This prevents automatic compacting of widgets.
-          preventCollision={true} // Prevent widgets from overlapping.
-          useCSSTransforms={false} // Helps with performance when dragging/resizing.
-        >
-          <div key="users">
-            <Widget
-              title="Users"
-              content="1,234 Users"
-              footer="Updated 10 mins ago"
-            />
-          </div>
-          <div key="revenue">
-            <Widget
-              title="Revenue"
-              content="$12,345"
-              footer="Updated 5 mins ago"
-            />
-          </div>
-          <div key="notifications">
-            <Widget
-              title="Notifications"
-              content="3 new notifications"
-              footer="Updated 20 mins ago"
-            />
-          </div>
-          <div key="performance">
-            <Widget
-              title="Performance"
-              content="Good Performance"
-              footer="Last updated: 1 hour ago"
-            />
-          </div>
-        </ResponsiveGridLayout>
-      </div>
+    <div className="p-8 bg-gray-100 min-h-screen">
+      <ResponsiveGridLayout
+        className="layout"
+        layouts={layouts}
+        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+        cols={{ lg: 12, md: 10, sm: 8, xs: 4, xxs: 2 }}
+        rowHeight={30}
+        isDraggable={true}
+        isResizable={true}
+      >
+        <div key="users">
+          <Widget
+            title="Users"
+            content="1,234 Users"
+            footer="Updated 10 mins ago"
+          />
+        </div>
+        <div key="revenue">
+          <Widget
+            title="Revenue"
+            content="$12,345"
+            footer="Updated 5 mins ago"
+          />
+        </div>
+        <div key="notifications">
+          <Widget
+            title="Notifications"
+            content="3 new notifications"
+            footer="Updated 20 mins ago"
+          />
+        </div>
+        <div key="performance">
+          <Widget
+            title="Performance"
+            content="Good Performance"
+            footer="Last updated: 1 hour ago"
+          />
+        </div>
+      </ResponsiveGridLayout>
     </div>
   );
 };
