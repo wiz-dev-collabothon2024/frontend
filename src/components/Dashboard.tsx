@@ -91,6 +91,21 @@ const Dashboard: React.FC<DashboardProps> = ({
     }),
   });
 
+  // Function to temporarily disable draggable when hovering over remove button
+  const disableDraggableOnHover = (id: string, disable: boolean) => {
+    setLayout((prevLayout) =>
+      prevLayout.map((widgetLayout) =>
+        widgetLayout.i === id
+          ? { ...widgetLayout, isDraggable: !disable }
+          : widgetLayout
+      )
+    );
+  };
+
+  const handleWidgetRemove = (id: string) => {
+    onWidgetRemove(id); // Remove the widget
+  };
+
   const handleLayoutChange = (newLayout: Layout[]) => {
     setLayout(newLayout);
     onLayoutChange(newLayout); // Update layout in the parent
@@ -119,10 +134,23 @@ const Dashboard: React.FC<DashboardProps> = ({
             }}
             className="relative"
           >
-            <Widget
-              onRemove={() => onWidgetRemove(id)} // Pass the onRemove function
-            >
+            <Widget>
               <WidgetComponent />
+              {/* Show delete button only when the menu is visible */}
+              {isMenuVisible && (
+                <button
+                  className="absolute top-0 right-0 bg-red-500 text-white p-1"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleWidgetRemove(id);
+                  }}
+                  onMouseEnter={() => disableDraggableOnHover(id, true)} // Disable dragging when hovering
+                  onMouseLeave={() => disableDraggableOnHover(id, false)} // Re-enable dragging when mouse leaves
+                  data-no-drag
+                >
+                  X
+                </button>
+              )}
             </Widget>
           </div>
         ))}
