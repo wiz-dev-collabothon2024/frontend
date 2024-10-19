@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDrag, DragSourceMonitor } from "react-dnd"; // Import the correct type
+import { useDrag, DragSourceMonitor } from "react-dnd";
 import Widget from "./Widget";
 
 interface WidgetData {
@@ -22,6 +22,12 @@ const WidgetMenu: React.FC<WidgetMenuProps> = ({ onWidgetDrop }) => {
       content: "3 new notifications",
     },
     { id: "performance", title: "Performance", content: "Good Performance" },
+    { id: "chart", title: "Sales Chart", content: "Sales data over time" },
+    {
+      id: "diagram",
+      title: "Account Balances",
+      content: "Account balance data",
+    }, // New widget
   ];
 
   const [widgets, setWidgets] = useState<WidgetData[]>(initialWidgets);
