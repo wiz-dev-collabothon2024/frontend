@@ -1,15 +1,12 @@
 import React, { useState } from "react";
+import Widget from "../Widget";
 
 const StatusWidget: React.FC = () => {
-  // Mocked data for the ETA and service state
   const etaMessage = "ETA: approx. 2h";
-
-  // State to control the service status
   const [serviceState, setServiceState] = useState<"up" | "issues" | "fatal">(
     "issues"
   );
 
-  // Function to get the color of the circles based on the service state
   const getCircleColors = () => {
     switch (serviceState) {
       case "up":
@@ -23,7 +20,6 @@ const StatusWidget: React.FC = () => {
     }
   };
 
-  // Determine the status message based on the service state
   const statusMessage =
     serviceState === "up"
       ? "The service is up"
@@ -34,8 +30,8 @@ const StatusWidget: React.FC = () => {
   const circleColors = getCircleColors();
 
   return (
-    <div className="flex items-center justify-between p-6 w-auto h-full rounded-lg border bg-white text-gray-800 shadow-sm">
-      <div className="text-center flex-grow">
+    <Widget>
+      <div className="text-center">
         <p className="text-lg font-bold">{statusMessage}</p>
       </div>
       <div className="flex flex-col items-center">
@@ -44,9 +40,7 @@ const StatusWidget: React.FC = () => {
             <div
               key={index}
               className={`w-4 h-4 rounded-full ${color}`}
-              style={{
-                animation: "pulse 3s ease-in-out infinite",
-              }}
+              style={{ animation: "pulse 3s ease-in-out infinite" }}
             />
           ))}
         </div>
@@ -62,7 +56,7 @@ const StatusWidget: React.FC = () => {
           }
         `}
       </style>
-    </div>
+    </Widget>
   );
 };
 

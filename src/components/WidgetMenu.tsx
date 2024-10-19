@@ -56,7 +56,7 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
   return (
     <div
       ref={drag}
-      className={`p-2 cursor-move ${isDragging ? "bg-gray-400" : ""}`}
+      className={`p-2 cursor-move ${isDragging ? "vibrate" : ""}`}
     >
       <p>{title}</p>
     </div>
