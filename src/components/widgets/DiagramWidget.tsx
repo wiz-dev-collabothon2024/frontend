@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Tooltip, Legend, PieChart, Pie, Cell } from "recharts";
+import { Tooltip, Legend, PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 const COLORS = [
   "#0088FE",
