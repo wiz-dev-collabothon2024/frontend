@@ -3,6 +3,7 @@ import DiagramWidget from "@/components/widgets/DiagramWidget";
 import FinanceWidget from "@/components/widgets/FinanceWidget";
 import DowntimeWidget  from "@/components/widgets/DowntimeWidget";
 import ForexWidget from "@/components/widgets/ForexWidget";
+import CoinWidget from "@/components/widgets/CoinWidget";
 
 export const widgetRegistry = {
   chart: {
@@ -62,7 +63,7 @@ export const widgetRegistry = {
     name: "Forex Widget", // Add names here
     component: ForexWidget,
     defaultLayout: {
-      i: "overview",
+      i: "forex",
       x: 0,
       y: 0,
       w: 4,
@@ -72,6 +73,20 @@ export const widgetRegistry = {
       preventCollision: true,
     },
   },
+  coin: {
+    name: "Coin Widget", // Add names here
+    component: CoinWidget,
+    defaultLayout: {
+      i: "coin",
+      x: 0,
+      y: 0,
+      w: 2,
+      h: 5,
+      isResizable: false,
+      isDraggable: false,
+      preventCollision: true,
+    },
+  }
 };
 
 type WidgetKey = keyof typeof widgetRegistry;
