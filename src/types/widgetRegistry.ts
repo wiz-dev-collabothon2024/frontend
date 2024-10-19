@@ -57,7 +57,7 @@ export const widgetRegistry = {
       w: 5,
       h: 3,
     },
-  }
+  },
   forex: {
     name: "Forex Widget", // Add names here
     component: ForexWidget,
