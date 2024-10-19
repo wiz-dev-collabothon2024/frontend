@@ -66,12 +66,7 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
   return (
     <div
       ref={drag}
-      className={`p-2 cursor-move ${isDragging ? "bg-gray-400" : ""} ${
-        isVibrating ? "vibrate" : ""
-      }`}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
+      className={`p-2 cursor-move ${isDragging ? "vibrate" : ""}`}
     >
       <p>{title}</p>
     </div>

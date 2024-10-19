@@ -1,7 +1,7 @@
 import ChartWidget from "@/components/widgets/ChartWidget";
 import DiagramWidget from "@/components/widgets/DiagramWidget";
 import FinanceWidget from "@/components/widgets/FinanceWidget";
-import DowntimeWidget  from "@/components/widgets/DowntimeWidget";
+import DowntimeWidget from "@/components/widgets/DowntimeWidget";
 import ForexWidget from "@/components/widgets/ForexWidget";
 
 export const widgetRegistry = {
@@ -55,18 +55,19 @@ export const widgetRegistry = {
       x: 0,
       y: 0,
       w: 5,
-      h: 3,
+      h: 7,
+      isResizable: false,
     },
   },
   forex: {
     name: "Forex Widget", // Add names here
     component: ForexWidget,
     defaultLayout: {
-      i: "overview",
+      i: "forex",
       x: 0,
       y: 0,
       w: 4,
-      h: 4,
+      h: 5,
       isResizable: false,
       isDraggable: true,
       preventCollision: true,

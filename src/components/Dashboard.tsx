@@ -121,7 +121,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                 }}
                 data-no-drag
               >
-                Remove
+                X
               </button>
             )}
           </div>
