@@ -1,0 +1,17 @@
+/* Add this CSS to your stylesheet */
+
+tr {
+    height: 40px; /* Adjust as needed */
+  }
+  
+  td, th {
+    vertical-align: middle;
+  }
+  
+  .left-column table th, .left-column table td {
+    width: 100%;
+  }
+  
+  .right-column table th, .right-column table td {
+    min-width: 100px; /* Adjust as needed */
+  }
