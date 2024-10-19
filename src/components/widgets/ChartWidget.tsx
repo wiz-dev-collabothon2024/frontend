@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   LineChart,
   Line,
@@ -7,23 +7,9 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
+import Widget from "../Widget";
 
 const ChartWidget: React.FC = () => {
-  const [isVibrating, setIsVibrating] = useState(false);
-
-  const handleMouseDown = (event: React.MouseEvent) => {
-    if (event.button === 0) {
-      // Check if the left mouse button is pressed
-      setIsVibrating(true);
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsVibrating(false);
-  };
-
-  const handleMouseLeave = () => {};
-
   const data = [
     { name: "Jan", value: 4000 },
     { name: "Feb", value: 3000 },
@@ -35,14 +21,7 @@ const ChartWidget: React.FC = () => {
   ];
 
   return (
-    <div
-      className={`flex-grow select-none flex-shrink basis-1 p-6 w-auto h-full rounded-lg border bg-white text-gray-800 shadow-sm ${
-        isVibrating ? "vibrate_small" : ""
-      }`}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseLeave} // Ensure it stops vibrating if the mouse leaves the widget
-    >
+    <Widget>
       <h2 className="text-lg font-bold">Sales Chart</h2>
       <LineChart width={400} height={200} data={data}>
         <Line type="monotone" dataKey="value" stroke="#8884d8" />
@@ -51,7 +30,7 @@ const ChartWidget: React.FC = () => {
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <Tooltip />
       </LineChart>
-    </div>
+    </Widget>
   );
 };
 
