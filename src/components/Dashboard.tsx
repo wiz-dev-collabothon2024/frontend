@@ -42,7 +42,6 @@ const Dashboard: React.FC<DashboardProps> = ({
         );
         const gridY = Math.floor((clientOffset.y - containerBounds.top) / 30);
 
-        // Set a temporary placeholder layout to indicate where the widget would land
         const placeholderLayout = {
           i: item.id,
           x: Math.max(0, gridX),
@@ -110,8 +109,17 @@ const Dashboard: React.FC<DashboardProps> = ({
         preventCollision={false}
       >
         {widgets.map(({ id, layout, component: WidgetComponent }) => (
-          <div key={id} data-grid={layout} className="relative">
+          <div
+            key={id}
+            data-grid={{
+              ...layout,
+              isDraggable: isMenuVisible && layout.isDraggable, // Dynamically set draggable based on menu visibility
+              isResizable: isMenuVisible && layout.isResizable, // Handle resizing
+            }}
+            className="relative"
+          >
             <WidgetComponent />
+            {/* Show delete button only when the menu is visible */}
             {isMenuVisible && (
               <button
                 className="absolute top-0 right-0 bg-red-500 text-white p-1"
