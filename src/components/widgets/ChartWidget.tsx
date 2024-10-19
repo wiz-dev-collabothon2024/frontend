@@ -36,7 +36,7 @@ const ChartWidget: React.FC = () => {
   ];
 
   return (
-    <Widget>
+    <>
       <h2 className="text-lg font-bold">Sales Chart</h2>
       <LineChart width={400} height={200} data={data}>
         <Line type="monotone" dataKey="value" stroke="#8884d8" />
@@ -45,7 +45,7 @@ const ChartWidget: React.FC = () => {
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <Tooltip />
       </LineChart>
-    </Widget>
+    </>
   );
 };
 
