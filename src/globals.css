@@ -66,8 +66,16 @@
 }
 
 .react-grid-item.react-grid-placeholder {
-  background-color: rgba(0, 0, 0, 0.1) !important; /* Light shadow effect */
+  background-color: rgba(84, 84, 84, 0.687) !important;
   border-radius: 8px !important; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important; /* Box shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
   border: none !important;
+}
+
+.grid-item {
+  transition: all 0.2s ease;
+}
+
+.grid-item-placeholder {
+  background-color: rgba(0, 0, 255, 0.2);
 }
