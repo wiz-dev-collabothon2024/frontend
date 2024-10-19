@@ -51,7 +51,7 @@ const DiagramWidget: React.FC = () => {
   }, []);
 
   return (
-    <Widget>
+    <>
       <h2 className="text-lg font-bold">{title}</h2>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
@@ -75,7 +75,7 @@ const DiagramWidget: React.FC = () => {
           <Tooltip />
         </PieChart>
       </ResponsiveContainer>
-    </Widget>
+    </>
   );
 };
 

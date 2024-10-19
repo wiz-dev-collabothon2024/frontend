@@ -40,7 +40,7 @@ const tableData = [
 
 const FinanceWidget: React.FC = () => {
   return (
-    <Widget>
+    <>
       <h2 className="text-lg font-bold">Cash Flow Overview</h2>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data}>
@@ -84,7 +84,7 @@ const FinanceWidget: React.FC = () => {
           </tbody>
         </table>
       </div>
-    </Widget>
+    </>
   );
 };
 
