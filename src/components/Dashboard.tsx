@@ -25,9 +25,10 @@ const Dashboard: React.FC<DashboardProps> = ({
   const [layout, setLayout] = useState<Layout[]>(
     widgets.map((widget) => ({ ...widget.layout, i: widget.id }))
   );
-  const [draggingWidget, setDraggingWidget] = useState<null | string>(null);
+  const [draggingWidget, setDraggingWidget] = useState<null | string>(null); // To visualize dragging
 
-  const [{ isOver }, drop] = useDrop(() => ({
+  // Use Drop to handle dropping widgets from the WidgetMenu
+  const [{ isOver }, drop] = useDrop({
     accept: "WIDGET",
     hover: (item: { id: string }, monitor) => {
       const clientOffset = monitor.getClientOffset();
@@ -41,7 +42,8 @@ const Dashboard: React.FC<DashboardProps> = ({
         );
         const gridY = Math.floor((clientOffset.y - containerBounds.top) / 30);
 
-        const ghostLayout = {
+        // Set a temporary placeholder layout to indicate where the widget would land
+        const placeholderLayout = {
           i: item.id,
           x: Math.max(0, gridX),
           y: Math.max(0, gridY),
@@ -49,10 +51,10 @@ const Dashboard: React.FC<DashboardProps> = ({
           h: 3,
         };
 
-        setDraggingWidget(item.id);
+        setDraggingWidget(item.id); // Set dragging widget to visualize it
         setLayout((prevLayout) => [
           ...prevLayout.filter((l) => l.i !== item.id),
-          ghostLayout,
+          placeholderLayout,
         ]);
       }
     },
@@ -82,18 +84,19 @@ const Dashboard: React.FC<DashboardProps> = ({
           );
         }
       }
-      setDraggingWidget(null);
+      setDraggingWidget(null); // Reset dragging state on drop
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
     }),
-  }));
+  });
 
   const handleLayoutChange = (newLayout: Layout[]) => {
     setLayout(newLayout);
-    onLayoutChange(newLayout);
+    onLayoutChange(newLayout); // Update layout in the parent
   };
 
+  // Render the grid layout with draggable/resizable widgets
   const memoizedGridLayout = useMemo(() => {
     return (
       <ResponsiveGridLayout
@@ -124,7 +127,7 @@ const Dashboard: React.FC<DashboardProps> = ({
           </div>
         ))}
 
-        {/* Render the ghost widget only if it's being dragged over the dashboard */}
+        {/* Render a ghost widget when dragging */}
         {draggingWidget && isOver && (
           <div
             key={draggingWidget}
@@ -149,9 +152,7 @@ const Dashboard: React.FC<DashboardProps> = ({
   return (
     <div
       ref={drop}
-      className={`p-8 bg-gray-100 min-h-screen lg:w-[1300px] md:w-[1096px] sm:w-[868px] xs-[580px] m-auto ${
-        isOver ? "border-2 border-dashed border-blue-500" : ""
-      }`}
+      className="p-8 bg-gray-100 min-h-screen lg:w-[1300px] md:w-[1096px] sm:w-[868px] xs-[580px] m-auto"
     >
       {memoizedGridLayout}
     </div>
