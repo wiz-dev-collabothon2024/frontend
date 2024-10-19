@@ -20,7 +20,7 @@ const ChartWidget: React.FC = () => {
   ];
 
   return (
-    <div className="flex-grow flex-shrink basis-1 p-6 m-4 w-auto h-full rounded-lg border bg-white text-gray-800 shadow-sm">
+    <div className="flex-grow select-none flex-shrink basis-1 p-6 w-auto h-full rounded-lg border bg-white text-gray-800 shadow-sm">
       <h2 className="text-lg font-bold">Sales Chart</h2>
       <LineChart width={400} height={200} data={data}>
         <Line type="monotone" dataKey="value" stroke="#8884d8" />

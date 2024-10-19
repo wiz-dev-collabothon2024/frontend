@@ -64,3 +64,10 @@
   border-radius: 5px;
   margin-bottom: 10px;
 }
+
+.react-grid-item.react-grid-placeholder {
+  background-color: rgba(0, 0, 0, 0.1) !important; /* Light shadow effect */
+  border-radius: 8px !important; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important; /* Box shadow for depth */
+  border: none !important;
+}
