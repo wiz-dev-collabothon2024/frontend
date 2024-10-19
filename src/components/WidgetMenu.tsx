@@ -1,26 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDrag } from "react-dnd";
-import { getAllWidgets } from "@/types/widgetRegistry"; // Import widget data
 
-const WidgetMenu: React.FC = () => {
-  const [availableWidgets, setAvailableWidgets] = useState(getAllWidgets());
+interface WidgetMenuProps {
+  availableWidgets: { id: string; name: string }[];
+  onWidgetRemove: (id: string) => void;
+}
 
-  const handleWidgetRemove = (id: string) => {
-    setAvailableWidgets((prevWidgets) =>
-      prevWidgets.filter((widget) => widget.id !== id)
-    );
-  };
-
+const WidgetMenu: React.FC<WidgetMenuProps> = ({
+  availableWidgets,
+  onWidgetRemove,
+}) => {
   return (
     <div>
-      {availableWidgets.map((widget) => (
-        <DraggableWidget
-          key={widget.id}
-          id={widget.id}
-          title={widget.name}
-          onWidgetRemove={handleWidgetRemove}
-        />
-      ))}
+      {availableWidgets.length === 0 ? (
+        <p>No available widgets</p>
+      ) : (
+        availableWidgets.map((widget) => (
+          <DraggableWidget
+            key={widget.id}
+            id={widget.id}
+            title={widget.name}
+            onWidgetRemove={onWidgetRemove}
+          />
+        ))
+      )}
     </div>
   );
 };
