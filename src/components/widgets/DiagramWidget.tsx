@@ -37,7 +37,7 @@ const DiagramWidget: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex-grow flex-shrink basis-1 p-6 m-4 w-auto h-full rounded-lg border bg-white text-gray-800 shadow-sm">
+    <div className="flex-grow flex-shrink basis-1 p-6 w-auto h-full rounded-lg border bg-white text-gray-800 shadow-sm">
       <h2 className="text-lg font-bold">{title}</h2>
       <BarChart
         width={400}

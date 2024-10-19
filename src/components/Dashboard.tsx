@@ -4,6 +4,7 @@ import { useDrop } from "react-dnd";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import { getWidgetById } from "@/types/widgetRegistry";
+import "@/globals.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
