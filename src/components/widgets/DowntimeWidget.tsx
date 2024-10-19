@@ -32,7 +32,7 @@ const StatusWidget: React.FC = () => {
     .reduce((sum, service) => sum + parseInt(service.eta || "0"), 0);
 
   return (
-    <div className="relative p-6 w-auto h-full rounded-lg border bg-[#17201f] text-white shadow-sm font-sans">
+    <>
       {/* Header with Servers State and question mark */}
       <div className="flex justify-start items-center mb-4 space-x-2">
         <h2 className="text-3xl font-semibold text-[#fced70]">Servers State</h2>
@@ -44,22 +44,22 @@ const StatusWidget: React.FC = () => {
         </div>
       </div>
 
-      {/* Tooltip showing total time */}
-      {showTooltip && (
-        <div className="bg-gray-600 text-white p-2 rounded-md shadow-md style={{ top: `${tooltipPosition.top}px`, left: `${tooltipPosition.left}px`, position: 'fixed' }}">
-          Total time left to fix the issues: ~{totalEstimatedTime}h
-        </div>
-      )}
+        {/* Tooltip showing total time */}
+        {showTooltip && (
+          <div className="absolute top-0 left-0 mt-8 p-4 bg-gray-800 text-white rounded-md shadow-lg opacity-90 z-10">
+            Total time left to fix the issues: ~{totalEstimatedTime}h
+          </div>
+        )}
 
-      {services.map((service, index) => {
-        const circleColors = getCircleColors(service.status as "up" | "issues" | "fatal");
+        {services.map((service, index) => {
+          const circleColors = getCircleColors(service.status as "up" | "issues" | "fatal");
 
         return (
           <div
             key={index}
             className="flex items-center justify-between py-1"
           >
-            <p className="text-lg font-normal text-[#d3d3d3]">
+            <p className="ext-lg font-normal text-[#d3d3d3]">
               {service.name}
             </p>
             <div className="flex items-center space-x-2">
@@ -75,7 +75,7 @@ const StatusWidget: React.FC = () => {
           </div>
         );
       })}
-    </div>
+    </>
   );
 };
 
