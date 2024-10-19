@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Widget from "../Widget";
 
 const StatusWidget: React.FC = () => {
   // Mocked data for the ETA and service state for each service
@@ -34,17 +33,16 @@ const StatusWidget: React.FC = () => {
 
   return (
     <>
-      <div className="relative">
-        {/* Header with Servers State and question mark */}
-        <div className="flex justify-start items-center mb-4 space-x-2">
-          <h2 className="text-3xl font-bold">Servers State</h2>
-          <div
-            className="bg-[#285252] w-6 h-6 rounded-lg flex items-center justify-center cursor-pointer ml-1"
-            onClick={() => setShowTooltip(!showTooltip)}
-          >
-            <span className="text-white font-bold">?</span>
-          </div>
+      {/* Header with Servers State and question mark */}
+      <div className="flex justify-start items-center mb-4 space-x-2">
+        <h2 className="text-3xl font-semibold text-[#fced70]">Servers State</h2>
+        <div
+          className="bg-[#285252] w-6 h-6 rounded-lg flex items-center justify-center cursor-pointer ml-1"
+          onClick={() => setShowTooltip(!showTooltip)}
+        >
+          <span className="text-white font-bold">?</span>
         </div>
+      </div>
 
         {/* Tooltip showing total time */}
         {showTooltip && (
@@ -56,27 +54,27 @@ const StatusWidget: React.FC = () => {
         {services.map((service, index) => {
           const circleColors = getCircleColors(service.status as "up" | "issues" | "fatal");
 
-          return (
-            <div
-              key={index}
-              className="flex items-center justify-between py-1"
-            >
-              <p className="text-lg font-bold">
-                {service.name}
-              </p>
-              <div className="flex items-center space-x-2">
-                {service.eta && <span className="text-sm text-gray-300 mr-2">~{service.eta}</span>}
-                {circleColors.map((color, idx) => (
-                  <div
-                    key={idx}
-                    className={`w-4 h-4 rounded-full ${color}`}
-                  />
-                ))}
-              </div>
+        return (
+          <div
+            key={index}
+            className="flex items-center justify-between py-1"
+          >
+            <p className="ext-lg font-normal text-[#d3d3d3]">
+              {service.name}
+            </p>
+            <div className="flex items-center space-x-2">
+
+              {service.eta && <span className="text-sm text-gray-300 mr-2">~{service.eta}</span>}
+              {circleColors.map((color, idx) => (
+                <div
+                  key={idx}
+                  className={`w-4 h-4 rounded-full ${color}`}
+                />
+              ))}
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </>
   );
 };
