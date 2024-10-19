@@ -11,6 +11,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import Widget from "../Widget";
 
 const data = [
   { name: "Jan 23", inflow: 4048916, outflow: 3541021, balance: 4724787 },
@@ -39,10 +40,8 @@ const tableData = [
 
 const FinanceWidget: React.FC = () => {
   return (
-    <div className="widget-container p-6 w-full h-auto rounded-lg border bg-white text-gray-800 shadow-sm">
+    <Widget>
       <h2 className="text-lg font-bold">Cash Flow Overview</h2>
-
-      {/* Chart Section */}
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -60,8 +59,6 @@ const FinanceWidget: React.FC = () => {
           />
         </BarChart>
       </ResponsiveContainer>
-
-      {/* Table Section */}
       <div className="mt-4 overflow-auto">
         <table className="w-full border-collapse text-left">
           <thead>
@@ -87,7 +84,7 @@ const FinanceWidget: React.FC = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </Widget>
   );
 };
 

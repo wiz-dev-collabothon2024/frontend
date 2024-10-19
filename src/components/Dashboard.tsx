@@ -4,6 +4,7 @@ import { useDrop } from "react-dnd";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import { getWidgetById } from "@/types/widgetRegistry";
+import Widget from "@/components/Widget"; // Import Widget component
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -26,7 +27,6 @@ const Dashboard: React.FC<DashboardProps> = ({
     widgets.map((widget) => ({ ...widget.layout, i: widget.id }))
   );
   const [draggingWidget, setDraggingWidget] = useState<null | string>(null);
-  const [isDragging, setIsDragging] = useState(false); // State to track dragging inside the dashboard
 
   // Use Drop to handle dropping widgets from the WidgetMenu
   const [{ isOver }, drop] = useDrop({
@@ -99,7 +99,6 @@ const Dashboard: React.FC<DashboardProps> = ({
         }
       }
       setDraggingWidget(null);
-      setIsDragging(false);
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
@@ -115,9 +114,7 @@ const Dashboard: React.FC<DashboardProps> = ({
   const memoizedGridLayout = useMemo(() => {
     return (
       <ResponsiveGridLayout
-        className={`layout ${
-          isDragging ? "border border-gray-300 border-dotted" : ""
-        }`}
+        className="layout"
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
         cols={{ lg: 14, md: 12, sm: 8, xs: 4, xxs: 2 }}
         rowHeight={30}
@@ -125,12 +122,12 @@ const Dashboard: React.FC<DashboardProps> = ({
         onLayoutChange={handleLayoutChange}
         useCSSTransforms={true}
         preventCollision={false}
-        onDragStart={() => setIsDragging(true)} // Set dragging state when a widget starts dragging
-        onDragStop={() => setIsDragging(false)} // Reset dragging state when dragging stops
       >
         {widgets.map(({ id, layout, component: WidgetComponent }) => (
           <div key={id} data-grid={layout} className="relative">
-            <WidgetComponent />
+            <Widget>
+              <WidgetComponent />
+            </Widget>
             {isMenuVisible && (
               <button
                 className="absolute top-0 right-0 bg-red-500 text-white p-1"
@@ -166,15 +163,12 @@ const Dashboard: React.FC<DashboardProps> = ({
     onLayoutChange,
     draggingWidget,
     isOver,
-    isDragging,
   ]);
 
   return (
     <div
       ref={drop}
-      className={`p-8 bg-gray-100 min-h-screen lg:w-[1300px] md:w-[1096px] sm:w-[868px] xs-[580px] m-auto ${
-        isOver || isDragging ? "border border-gray-300 border-dotted" : ""
-      }`} // Apply light grey thin dotted border when widget is over or dragging inside the dashboard
+      className="p-8 bg-gray-100 min-h-screen lg:w-[1300px] md:w-[1096px] sm:w-[868px] xs-[580px] m-auto"
     >
       {memoizedGridLayout}
     </div>

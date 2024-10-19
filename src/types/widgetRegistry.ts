@@ -62,7 +62,7 @@ export const widgetRegistry = {
     name: "Forex Widget", // Add names here
     component: ForexWidget,
     defaultLayout: {
-      i: "overview",
+      i: "forex",
       x: 0,
       y: 0,
       w: 6,
