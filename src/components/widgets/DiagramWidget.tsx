@@ -27,7 +27,6 @@ const DiagramWidget: React.FC = () => {
   const [data, setData] = useState<{ account: string; balance: number }[]>([]);
   const [title, setTitle] = useState("Account Balances");
 
-
   // useEffect(() => {
   //   const fetchData = async () => {
   //     const response = await new Promise((resolve) =>
@@ -59,8 +58,8 @@ const DiagramWidget: React.FC = () => {
         const response = await fetch(endpoint, {
           method: "GET",
           headers: {
-            "Authorization": `Bearer ${token}`,  // Add Bearer token here
-            "Content-Type": "application/json",  // Optional, depending on your backend requirements
+            Authorization: `Bearer ${token}`, // Add Bearer token here
+            "Content-Type": "application/json", // Optional, depending on your backend requirements
           },
           mode: "cors",
         });
@@ -74,15 +73,15 @@ const DiagramWidget: React.FC = () => {
         console.error("Error fetching data:", error);
       }
     };
-  
+
     fetchData();
   }, []);
 
   const CHART_OUTER_RADIUS = 150;
-  const CHART_INNER_RADIUS = 120
+  const CHART_INNER_RADIUS = 120;
 
   return (
-    <div className="flex-grow flex-shrink basis-1 p-6 m-4 w-auto h-full rounded-lg border bg-white text-gray-800 shadow-sm">
+    <div className="flex-grow flex-shrink basis-1 p-6 w-auto h-full rounded-lg border bg-white text-gray-800 shadow-sm">
       <div className="p-4 bg-white rounded shadow-md">
         <h2 className="text-lg font-bold">{title}</h2>
         <PieChart width={400} height={400}>
@@ -98,7 +97,10 @@ const DiagramWidget: React.FC = () => {
             label
           >
             {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
             ))}
           </Pie>
           <Tooltip />
