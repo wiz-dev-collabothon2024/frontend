@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDrag } from "react-dnd";
 
 interface WidgetMenuProps {
@@ -53,10 +53,25 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
     }),
   }));
 
+  const [isVibrating, setIsVibrating] = useState(false);
+
+  const handleMouseDown = () => {
+    setIsVibrating(true);
+  };
+
+  const handleMouseUp = () => {
+    setIsVibrating(false);
+  };
+
   return (
     <div
       ref={drag}
-      className={`p-2 cursor-move ${isDragging ? "bg-gray-400" : ""}`}
+      className={`p-2 cursor-move ${isDragging ? "bg-gray-400" : ""} ${
+        isVibrating ? "vibrate" : ""
+      }`}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
     >
       <p>{title}</p>
     </div>
