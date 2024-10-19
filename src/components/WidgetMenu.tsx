@@ -1,69 +1,31 @@
-import React, { useState } from "react";
-import { useDrag, DragSourceMonitor } from "react-dnd";
-import Widget from "./Widget";
+import React from "react";
+import { useDrag } from "react-dnd";
 
-interface WidgetData {
-  id: string;
-  title: string;
-  content: string;
-}
+const initialWidgets = [
+  { id: "chart", name: "Chart Widget" },
+  { id: "diagram", name: "Diagram Widget" },
+];
 
-interface WidgetMenuProps {
-  onWidgetDrop: (id: string) => void;
-}
-
-const WidgetMenu: React.FC<WidgetMenuProps> = ({ onWidgetDrop }) => {
-  const initialWidgets: WidgetData[] = [
-    { id: "users", title: "Users", content: "1,234 Users" },
-    { id: "revenue", title: "Revenue", content: "$12,345" },
-    {
-      id: "notifications",
-      title: "Notifications",
-      content: "3 new notifications",
-    },
-    { id: "performance", title: "Performance", content: "Good Performance" },
-    { id: "chart", title: "Sales Chart", content: "Sales data over time" },
-    {
-      id: "diagram",
-      title: "Account Balances",
-      content: "Account balance data",
-    }, // New widget
-  ];
-
-  const [widgets, setWidgets] = useState<WidgetData[]>(initialWidgets);
-
-  const handleDrop = (id: string) => {
-    setWidgets((prev) => prev.filter((widget) => widget.id !== id));
-    onWidgetDrop(id); // Notify the dashboard that a widget has been dropped
-  };
-
+const WidgetMenu: React.FC = () => {
   return (
     <div>
-      {widgets.map((widget) => (
-        <DraggableWidget key={widget.id} widget={widget} onDrop={handleDrop} />
+      {initialWidgets.map((widget) => (
+        <DraggableWidget key={widget.id} id={widget.id} title={widget.name} />
       ))}
     </div>
   );
 };
 
 interface DraggableWidgetProps {
-  widget: WidgetData;
-  onDrop: (id: string) => void;
+  id: string;
+  title: string;
 }
 
-const DraggableWidget: React.FC<DraggableWidgetProps> = ({
-  widget,
-  onDrop,
-}) => {
+const DraggableWidget: React.FC<DraggableWidgetProps> = ({ id, title }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "WIDGET",
-    item: { id: widget.id },
-    end: (item: { id: string }, monitor: DragSourceMonitor) => {
-      if (monitor.didDrop()) {
-        onDrop(item.id);
-      }
-    },
-    collect: (monitor: DragSourceMonitor) => ({
+    item: { id },
+    collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
   }));
@@ -73,7 +35,7 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
       ref={drag}
       className={`p-2 cursor-move ${isDragging ? "bg-gray-400" : ""}`}
     >
-      <Widget title={widget.title} content={widget.content} />
+      <p>{title}</p>
     </div>
   );
 };
