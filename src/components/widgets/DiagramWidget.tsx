@@ -9,6 +9,7 @@ import {
   PieChart,
   Pie,
   Cell,
+  ResponsiveContainer,
 } from "recharts";
 
 const COLORS = [
@@ -54,7 +55,7 @@ const DiagramWidget: React.FC = () => {
   }, []);
 
   const CHART_OUTER_RADIUS = "80%";
-  const CHART_INNER_RADIUS = "60%"
+  const CHART_INNER_RADIUS = "60%";
 
   return (
     <div className="widget-container p-6 w-full h-full rounded-lg border bg-white text-gray-800 shadow-sm flex flex-col">
@@ -68,8 +69,8 @@ const DiagramWidget: React.FC = () => {
               nameKey="account"
               cx="40%"
               cy="50%"
-              outerRadius= {CHART_OUTER_RADIUS} // Adjust as needed
-              innerRadius= {CHART_INNER_RADIUS} // Adjust as needed
+              outerRadius={CHART_OUTER_RADIUS} // Adjust as needed
+              innerRadius={CHART_INNER_RADIUS} // Adjust as needed
             >
               {data.map((entry, index) => (
                 <Cell
@@ -78,16 +79,13 @@ const DiagramWidget: React.FC = () => {
                 />
               ))}
             </Pie>
-            <Legend 
-              layout="vertical" 
-              align="right" 
+            <Legend
+              layout="vertical"
+              align="right"
               verticalAlign="middle"
               iconSize={6}
-              wrapperStyle={
-                { fontSize: '14px',
-                  lineHeight: '22px',
-                }} // Adjusts font size and line spacing
-              />
+              wrapperStyle={{ fontSize: "14px", lineHeight: "22px" }} // Adjusts font size and line spacing
+            />
             <Tooltip />
           </PieChart>
         </ResponsiveContainer>
