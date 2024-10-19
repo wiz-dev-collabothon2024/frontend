@@ -83,7 +83,7 @@ const DiagramWidget: React.FC = () => {
         </ResponsiveContainer>
       </div>
     </div>
-  );
+  ); 
 };
 
 export default DiagramWidget;
