@@ -4,6 +4,7 @@ import { useDrop } from "react-dnd";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import { getWidgetById } from "@/types/widgetRegistry";
+import Widget from "@/components/Widget"; // Implied import for Widget component
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -118,20 +119,11 @@ const Dashboard: React.FC<DashboardProps> = ({
             }}
             className="relative"
           >
-            <WidgetComponent />
-            {/* Show delete button only when the menu is visible */}
-            {isMenuVisible && (
-              <button
-                className="absolute top-0 right-0 bg-red-500 text-white p-1"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onWidgetRemove(id);
-                }}
-                data-no-drag
-              >
-                X
-              </button>
-            )}
+            <Widget
+              onRemove={() => onWidgetRemove(id)} // Pass the onRemove function
+            >
+              <WidgetComponent />
+            </Widget>
           </div>
         ))}
 

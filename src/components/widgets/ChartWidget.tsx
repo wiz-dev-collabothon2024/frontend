@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   LineChart,
   Line,
@@ -10,6 +10,21 @@ import {
 import Widget from "../Widget";
 
 const ChartWidget: React.FC = () => {
+  const [isVibrating, setIsVibrating] = useState(false);
+
+  const handleMouseDown = (event: React.MouseEvent) => {
+    if (event.button === 0) { // Check if the left mouse button is pressed
+      setIsVibrating(true);
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsVibrating(false);
+  };
+
+  const handleMouseLeave = () => {
+  };
+
   const data = [
     { name: "Jan", value: 4000 },
     { name: "Feb", value: 3000 },
@@ -21,7 +36,7 @@ const ChartWidget: React.FC = () => {
   ];
 
   return (
-    <Widget>
+    <>
       <h2 className="text-lg font-bold">Sales Chart</h2>
       <LineChart width={400} height={200} data={data}>
         <Line type="monotone" dataKey="value" stroke="#8884d8" />
@@ -30,7 +45,7 @@ const ChartWidget: React.FC = () => {
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <Tooltip />
       </LineChart>
-    </Widget>
+    </>
   );
 };
 

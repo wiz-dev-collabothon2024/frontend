@@ -2,9 +2,10 @@ import React, { useState } from "react";
 
 interface WidgetProps {
   children: React.ReactNode;
+  onRemove?: () => void; // Add a prop for handling widget removal
 }
 
-const Widget: React.FC<WidgetProps> = ({ children }) => {
+const Widget: React.FC<WidgetProps> = ({ children, onRemove }) => {
   const [isVibrating, setIsVibrating] = useState(false);
 
   // Trigger vibration when the left mouse button is pressed
@@ -35,6 +36,17 @@ const Widget: React.FC<WidgetProps> = ({ children }) => {
       onMouseLeave={handleMouseLeave} // Stop vibrating on mouse leave
     >
       {children}
+      {onRemove && (
+        <button
+          className="absolute top-0 right-0 bg-red-500 text-white p-1"
+          onClick={(e) => {
+            e.stopPropagation();
+            onRemove();
+          }}
+        >
+          X
+        </button>
+      )}
     </div>
   );
 };

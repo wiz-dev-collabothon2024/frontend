@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDrag } from "react-dnd";
 
 interface WidgetMenuProps {
@@ -52,6 +52,16 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
       isDragging: !!monitor.isDragging(),
     }),
   }));
+
+  const [isVibrating, setIsVibrating] = useState(false);
+
+  const handleMouseDown = () => {
+    setIsVibrating(true);
+  };
+
+  const handleMouseUp = () => {
+    setIsVibrating(false);
+  };
 
   return (
     <div
