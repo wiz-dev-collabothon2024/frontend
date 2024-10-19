@@ -15,7 +15,7 @@ export const widgetRegistry = {
       w: 7,
       h: 7,
       isResizable: false,
-      isDraggable: true,
+      isDraggable: false,
       preventCollision: true,
     },
   },
