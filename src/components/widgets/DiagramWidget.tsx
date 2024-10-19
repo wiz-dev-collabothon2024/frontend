@@ -1,16 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  PieChart,
-  Pie,
-  Cell,
-} from "recharts";
+import { Tooltip, Legend, PieChart, Pie, Cell } from "recharts";
 
 const COLORS = [
   "#0088FE",
