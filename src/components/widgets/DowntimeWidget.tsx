@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Widget from "../Widget";
 
 const StatusWidget: React.FC = () => {
   // Mocked data for the ETA and service state for each service
@@ -33,10 +32,10 @@ const StatusWidget: React.FC = () => {
     .reduce((sum, service) => sum + parseInt(service.eta || "0"), 0);
 
   return (
-    <Widget>
+    <div className="relative p-6 w-auto h-full rounded-lg border bg-[#17201f] text-white shadow-sm font-sans">
       {/* Header with Servers State and question mark */}
       <div className="flex justify-start items-center mb-4 space-x-2">
-        <h2 className="text-3xl font-bold">Servers State</h2>
+        <h2 className="text-3xl font-semibold text-[#fced70]">Servers State</h2>
         <div
           className="bg-[#285252] w-6 h-6 rounded-lg flex items-center justify-center cursor-pointer ml-1"
           onClick={() => setShowTooltip(!showTooltip)}
@@ -60,7 +59,7 @@ const StatusWidget: React.FC = () => {
             key={index}
             className="flex items-center justify-between py-1"
           >
-            <p className="text-lg font-bold">
+            <p className="text-lg font-normal text-[#d3d3d3]">
               {service.name}
             </p>
             <div className="flex items-center space-x-2">
@@ -76,7 +75,7 @@ const StatusWidget: React.FC = () => {
           </div>
         );
       })}
-    </Widget>
+    </div>
   );
 };
 
