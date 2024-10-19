@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -13,11 +13,9 @@ import {
 } from "recharts";
 
 const data = [
-  { name: "Jan 23", inflow: 4048916, outflow: 3541021, balance: 4724787 },
-  { name: "Feb 23", inflow: 4539844, outflow: 4388736, balance: 4015790 },
-  { name: "Mar 23", inflow: 4839006, outflow: 4436615, balance: 4116898 },
-  { name: "Apr 23", inflow: 5336000, outflow: 5306615, balance: 4524764 },
-  { name: "May 23", inflow: 6305000, outflow: 4836705, balance: 3010059 },
+  { currency: "USD", buy: 0.9, sell: 1.1},
+  { currency: "GBP", buy: 1.2, sell: 1.4},
+  { currency: "PLN", buy: 0.2, sell: 0.3},
 ];
 
 const tableData = [
@@ -37,58 +35,33 @@ const tableData = [
   { subCategory: "ACME Inc.", value: "296,432", percentage: "8%" },
 ];
 
-const FinanceWidget: React.FC = () => {
+// const [buyRate, setBuyRate] = useState<number | null>(null);
+// const [sellRate, setSellRate] = useState<number | null>(null);
+const buyRate = 0.9;
+const sellRate = 1.1;
+
+const ForexWidget: React.FC = () => {
   return (
-    <div className="widget-container p-6 w-full h-auto rounded-lg border bg-white text-gray-800 shadow-sm">
-      <h2 className="text-lg font-bold">Cash Flow Overview</h2>
-
-      {/* Chart Section */}
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="inflow" fill="#4CAF50" name="Cash Inflow" />
-          <Bar dataKey="outflow" fill="#F44336" name="Cash Outflow" />
-          <Line
-            type="monotone"
-            dataKey="balance"
-            stroke="#8884d8"
-            name="Balance"
-          />
-        </BarChart>
-      </ResponsiveContainer>
-
-      {/* Table Section */}
-      <div className="mt-4 overflow-auto">
-        <table className="w-full border-collapse text-left">
-          <thead>
-            <tr>
-              <th className="border p-2">Category</th>
-              <th className="border p-2">Amount</th>
-              <th className="border p-2">%</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tableData.map((row, index) => (
-              <tr
-                key={index}
-                className={row.subCategory ? "text-sm" : "font-bold"}
-              >
-                <td className={`border p-2 ${row.subCategory ? "pl-6" : ""}`}>
-                  {row.category || row.subCategory}
-                </td>
-                <td className="border p-2">{row.value}</td>
-                <td className="border p-2">{row.percentage || ""}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className="widget-container p-3 w-full  rounded-lg border bg-white text-gray-800 shadow-sm flex flex-col">
+      <h2 className="text-lg font-bold mb-4">Currency Exchange Rates</h2>
+      <div className="flex justify-between items-start">
+        {/* Buy Box */}
+        <div className="flex flex-col items-center flex-1 bg-green-100 rounded-lg">
+          <span className="text-xl font-semibold">Buy</span>
+          <span className="mt-auto text-2xl font-bold">
+            {buyRate ? buyRate.toFixed(4) : "Loading..."}
+          </span>
+        </div>
+        {/* Sell Box */}
+        <div className="flex flex-col items-center flex-1 bg-red-100 rounded-lg">
+          <span className="text-xl font-semibold">Sell</span>
+          <span className="mt-auto text-2xl font-bold">
+            {sellRate ? sellRate.toFixed(4) : "Loading..."}
+          </span>
+        </div>
       </div>
     </div>
   );
 };
 
-export default FinanceWidget;
+export default ForexWidget;
