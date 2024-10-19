@@ -53,35 +53,44 @@ const DiagramWidget: React.FC = () => {
     fetchData();
   }, []);
 
-  const CHART_OUTER_RADIUS = 150;
-  const CHART_INNER_RADIUS = 120;
+  const CHART_OUTER_RADIUS = "80%";
+  const CHART_INNER_RADIUS = "60%"
 
   return (
-    <div className="flex-grow flex-shrink basis-1 p-6 w-auto h-full rounded-lg border bg-white text-gray-800 shadow-sm">
-      <div className="p-4 bg-white rounded shadow-md">
-        <h2 className="text-lg font-bold">{title}</h2>
-        <PieChart width={400} height={400}>
-          <Pie
-            data={data}
-            dataKey="balance"
-            nameKey="account"
-            cx="50%"
-            cy="50%"
-            outerRadius={CHART_OUTER_RADIUS}
-            innerRadius={CHART_INNER_RADIUS} // Set inner radius for the hole
-            fill="#8884d8"
-            label
-          >
-            {data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
+    <div className="widget-container p-6 w-full h-full rounded-lg border bg-white text-gray-800 shadow-sm flex flex-col">
+      <h2 className="text-lg font-bold flex-shrink-0">{title}</h2>
+      <div className="flex-grow">
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={data}
+              dataKey="balance"
+              nameKey="account"
+              cx="40%"
+              cy="50%"
+              outerRadius= {CHART_OUTER_RADIUS} // Adjust as needed
+              innerRadius= {CHART_INNER_RADIUS} // Adjust as needed
+            >
+              {data.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+            <Legend 
+              layout="vertical" 
+              align="right" 
+              verticalAlign="middle"
+              iconSize={6}
+              wrapperStyle={
+                { fontSize: '14px',
+                  lineHeight: '22px',
+                }} // Adjusts font size and line spacing
               />
-            ))}
-          </Pie>
-          <Tooltip />
-          <Legend />
-        </PieChart>
+            <Tooltip />
+          </PieChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );
