@@ -1,62 +1,81 @@
 import React, { useState } from "react";
-import Widget from "../Widget";
 
 const StatusWidget: React.FC = () => {
-  const etaMessage = "ETA: approx. 2h";
-  const [serviceState, setServiceState] = useState<"up" | "issues" | "fatal">(
-    "issues"
-  );
+  // Mocked data for the ETA and service state for each service
+  const services = [
+    { name: "Corporate-payments", status: "up" },
+    { name: "Securities", status: "fatal", eta: "6h" },
+    { name: "Customers", status: "issues", eta: "2h" },
+    { name: "Swift GPI Transactions", status: "up" }
+  ];
 
-  const getCircleColors = () => {
+  // State to control the visibility of the question mark tooltip
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  // Function to get the color of the circles based on the service state
+  const getCircleColors = (serviceState: "up" | "issues" | "fatal") => {
     switch (serviceState) {
       case "up":
         return ["bg-green-500", "bg-green-500", "bg-green-500"];
       case "issues":
-        return ["bg-orange-500", "bg-orange-500", "bg-gray-400"];
+        return ["bg-orange-500", "bg-orange-500", "border border-gray-400"];
       case "fatal":
-        return ["bg-red-500", "bg-gray-400", "bg-gray-400"];
+        return ["bg-red-500", "border border-gray-400", "border border-gray-400"];
       default:
-        return ["bg-gray-400", "bg-gray-400", "bg-gray-400"];
+        return ["border border-gray-400", "border border-gray-400", "border border-gray-400"];
     }
   };
 
-  const statusMessage =
-    serviceState === "up"
-      ? "The service is up"
-      : serviceState === "issues"
-      ? "The service is down"
-      : "Service error: fatal";
-
-  const circleColors = getCircleColors();
+  // Calculate the sum of the times from services with ETA
+  const totalEstimatedTime = services
+    .filter(service => service.eta)
+    .reduce((sum, service) => sum + parseInt(service.eta || "0"), 0);
 
   return (
-    <Widget>
-      <div className="text-center">
-        <p className="text-lg font-bold">{statusMessage}</p>
-      </div>
-      <div className="flex flex-col items-center">
-        <div className="flex space-x-2 mb-2">
-          {circleColors.map((color, index) => (
-            <div
-              key={index}
-              className={`w-4 h-4 rounded-full ${color}`}
-              style={{ animation: "pulse 3s ease-in-out infinite" }}
-            />
-          ))}
-        </div>
-        <div className="text-sm text-gray-600">
-          <p>{etaMessage}</p>
+    <div className="relative p-6 w-auto h-full rounded-lg border bg-[#637778] text-white shadow-sm font-['Open_Sans']">
+      {/* Header with Servers State and question mark */}
+      <div className="flex justify-start items-center mb-4 space-x-2">
+        <h2 className="text-3xl font-bold">Servers State</h2>
+        <div
+          className="bg-[#285252] w-6 h-6 rounded-lg flex items-center justify-center cursor-pointer ml-1"
+          onClick={() => setShowTooltip(!showTooltip)}
+        >
+          <span className="text-white font-bold">?</span>
         </div>
       </div>
-      <style>
-        {`
-          @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(0.7); }
-          }
-        `}
-      </style>
-    </Widget>
+
+      {/* Tooltip showing total time */}
+      {showTooltip && (
+        <div className="bg-gray-600 text-white p-2 rounded-md shadow-md style={{ top: `${tooltipPosition.top}px`, left: `${tooltipPosition.left}px`, position: 'fixed' }}">
+          Total time left to fix the issues: ~{totalEstimatedTime}h
+        </div>
+      )}
+
+      {services.map((service, index) => {
+        const circleColors = getCircleColors(service.status as "up" | "issues" | "fatal");
+
+        return (
+          <div
+            key={index}
+            className="flex items-center justify-between py-1"
+          >
+            <p className="text-lg font-bold">
+              {service.name}
+            </p>
+            <div className="flex items-center space-x-2">
+
+              {service.eta && <span className="text-sm text-gray-300 mr-2">~{service.eta}</span>}
+              {circleColors.map((color, idx) => (
+                <div
+                  key={idx}
+                  className={`w-4 h-4 rounded-full ${color}`}
+                />
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 };
 
