@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDrag } from "react-dnd";
 
 interface WidgetMenuProps {
@@ -10,20 +10,35 @@ const WidgetMenu: React.FC<WidgetMenuProps> = ({
   availableWidgets,
   onWidgetRemove,
 }) => {
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuVisible((prev) => !prev);
+  };
+
   return (
-    <div>
-      {availableWidgets.length === 0 ? (
-        <p>No available widgets</p>
-      ) : (
-        availableWidgets.map((widget) => (
-          <DraggableWidget
-            key={widget.id}
-            id={widget.id}
-            title={widget.name}
-            onWidgetRemove={onWidgetRemove}
-          />
-        ))
-      )}
+    <div className="">
+      {/* Sliding Menu */}
+      <div
+        className={
+          "transition-all duration-500 overflow-hidden max-h-96 opacity-100"
+        }
+      >
+        <div className="bg-gray-200 p-4 mt-2">
+          {availableWidgets.length === 0 ? (
+            <p>No available widgets</p>
+          ) : (
+            availableWidgets.map((widget) => (
+              <DraggableWidget
+                key={widget.id}
+                id={widget.id}
+                title={widget.name}
+                onWidgetRemove={onWidgetRemove}
+              />
+            ))
+          )}
+        </div>
+      </div>
     </div>
   );
 };

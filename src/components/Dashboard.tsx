@@ -25,7 +25,8 @@ const Dashboard: React.FC<DashboardProps> = ({
   const [layout, setLayout] = useState<Layout[]>(
     widgets.map((widget) => ({ ...widget.layout, i: widget.id }))
   );
-  const [draggingWidget, setDraggingWidget] = useState<null | string>(null); // To visualize dragging
+  const [draggingWidget, setDraggingWidget] = useState<null | string>(null);
+  const [isDragging, setIsDragging] = useState(false); // State to track dragging inside the dashboard
 
   // Use Drop to handle dropping widgets from the WidgetMenu
   const [{ isOver }, drop] = useDrop({
@@ -37,21 +38,28 @@ const Dashboard: React.FC<DashboardProps> = ({
         ?.getBoundingClientRect();
 
       if (clientOffset && containerBounds) {
-        const gridX = Math.floor(
-          (clientOffset.x - containerBounds.left) / (containerBounds.width / 14)
+        const gridX = Math.max(
+          0,
+          Math.floor(
+            (clientOffset.x - containerBounds.left) /
+              (containerBounds.width / 14)
+          )
         );
-        const gridY = Math.floor((clientOffset.y - containerBounds.top) / 30);
+        const gridY = Math.max(
+          0,
+          Math.floor((clientOffset.y - containerBounds.top) / 30)
+        );
 
         // Set a temporary placeholder layout to indicate where the widget would land
         const placeholderLayout = {
           i: item.id,
-          x: Math.max(0, gridX),
-          y: Math.max(0, gridY),
+          x: gridX,
+          y: gridY,
           w: 5,
           h: 3,
         };
 
-        setDraggingWidget(item.id); // Set dragging widget to visualize it
+        setDraggingWidget(item.id);
         setLayout((prevLayout) => [
           ...prevLayout.filter((l) => l.i !== item.id),
           placeholderLayout,
@@ -60,31 +68,38 @@ const Dashboard: React.FC<DashboardProps> = ({
     },
     drop: (item: { id: string }, monitor) => {
       const widgetData = getWidgetById(item.id);
-      if (widgetData && !widgets.find((widget) => widget.id === item.id)) {
-        const clientOffset = monitor.getClientOffset();
-        const containerBounds = document
-          .querySelector(".layout")
-          ?.getBoundingClientRect();
+      const clientOffset = monitor.getClientOffset();
+      const containerBounds = document
+        .querySelector(".layout")
+        ?.getBoundingClientRect();
 
+      if (widgetData && !widgets.find((widget) => widget.id === item.id)) {
         if (clientOffset && containerBounds) {
-          const gridX = Math.floor(
-            (clientOffset.x - containerBounds.left) /
-              (containerBounds.width / 14)
+          const gridX = Math.max(
+            0,
+            Math.floor(
+              (clientOffset.x - containerBounds.left) /
+                (containerBounds.width / 14)
+            )
           );
-          const gridY = Math.floor((clientOffset.y - containerBounds.top) / 30);
+          const gridY = Math.max(
+            0,
+            Math.floor((clientOffset.y - containerBounds.top) / 30)
+          );
 
           onWidgetAdd(
             item.id,
             {
               ...widgetData.defaultLayout,
-              x: Math.max(0, gridX),
-              y: Math.max(0, gridY),
+              x: gridX,
+              y: gridY,
             },
             widgetData.component
           );
         }
       }
-      setDraggingWidget(null); // Reset dragging state on drop
+      setDraggingWidget(null);
+      setIsDragging(false);
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
@@ -100,7 +115,9 @@ const Dashboard: React.FC<DashboardProps> = ({
   const memoizedGridLayout = useMemo(() => {
     return (
       <ResponsiveGridLayout
-        className="layout"
+        className={`layout ${
+          isDragging ? "border border-gray-300 border-dotted" : ""
+        }`}
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
         cols={{ lg: 14, md: 12, sm: 8, xs: 4, xxs: 2 }}
         rowHeight={30}
@@ -108,6 +125,8 @@ const Dashboard: React.FC<DashboardProps> = ({
         onLayoutChange={handleLayoutChange}
         useCSSTransforms={true}
         preventCollision={false}
+        onDragStart={() => setIsDragging(true)} // Set dragging state when a widget starts dragging
+        onDragStop={() => setIsDragging(false)} // Reset dragging state when dragging stops
       >
         {widgets.map(({ id, layout, component: WidgetComponent }) => (
           <div key={id} data-grid={layout} className="relative">
@@ -147,12 +166,15 @@ const Dashboard: React.FC<DashboardProps> = ({
     onLayoutChange,
     draggingWidget,
     isOver,
+    isDragging,
   ]);
 
   return (
     <div
       ref={drop}
-      className="p-8 bg-gray-100 min-h-screen lg:w-[1300px] md:w-[1096px] sm:w-[868px] xs-[580px] m-auto"
+      className={`p-8 bg-gray-100 min-h-screen lg:w-[1300px] md:w-[1096px] sm:w-[868px] xs-[580px] m-auto ${
+        isOver || isDragging ? "border border-gray-300 border-dotted" : ""
+      }`} // Apply light grey thin dotted border when widget is over or dragging inside the dashboard
     >
       {memoizedGridLayout}
     </div>

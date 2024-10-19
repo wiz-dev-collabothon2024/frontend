@@ -79,3 +79,8 @@
 .grid-item-placeholder {
   background-color: rgba(0, 0, 255, 0.2);
 }
+
+.react-grid-layout {
+  position: relative;
+  transition: height 0.2s;
+}
