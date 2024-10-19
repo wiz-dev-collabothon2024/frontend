@@ -33,7 +33,7 @@ const StatusWidget: React.FC = () => {
     .reduce((sum, service) => sum + parseInt(service.eta || "0"), 0);
 
   return (
-    <Widget>
+    <>
       {/* Header with Servers State and question mark */}
       <div className="flex justify-start items-center mb-4 space-x-2">
         <h2 className="text-3xl font-bold">Servers State</h2>
@@ -76,7 +76,7 @@ const StatusWidget: React.FC = () => {
           </div>
         );
       })}
-    </Widget>
+    </>
   );
 };
 

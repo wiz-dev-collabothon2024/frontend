@@ -8,7 +8,7 @@ interface CurrencyCardProps {
 
 const CurrencyCard: React.FC<CurrencyCardProps> = ({ currency, buyRate, sellRate }) => {
   return (
-    <div className="card p-4 w-full rounded-lg border bg-white text-gray-800 shadow-sm flex flex-col">
+    <>
       <h2 className="text-lg font-bold mb-2">{currency} Exchange Rates</h2>
       <div className="flex justify-between items-start">
         {/* Buy Box */}
@@ -26,7 +26,7 @@ const CurrencyCard: React.FC<CurrencyCardProps> = ({ currency, buyRate, sellRate
           </span>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
