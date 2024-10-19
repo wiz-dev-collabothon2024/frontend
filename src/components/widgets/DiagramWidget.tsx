@@ -11,6 +11,7 @@ import {
 
 const DiagramWidget: React.FC = () => {
   const [data, setData] = useState<{ account: string; balance: number }[]>([]);
+  const [title, setTitle] = useState("Account Balances");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +38,7 @@ const DiagramWidget: React.FC = () => {
 
   return (
     <div className="flex-grow flex-shrink basis-1 p-6 m-4 w-auto h-full rounded-lg border bg-white text-gray-800 shadow-sm">
-      <h2 className="text-lg font-bold">Account Balances</h2>
+      <h2 className="text-lg font-bold">{title}</h2>
       <BarChart
         width={400}
         height={200}

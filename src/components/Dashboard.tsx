@@ -1,62 +1,63 @@
 import React, { useState } from "react";
 import { Responsive, WidthProvider, Layout } from "react-grid-layout";
 import { useDrop } from "react-dnd";
-import ChartWidget from "./widgets/ChartWidget";
-import DiagramWidget from "./widgets/DiagramWidget";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
+import { getWidgetById } from "@/types/widgetRegistry";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const Dashboard: React.FC = () => {
-  const [widgets, setWidgets] = useState<{ id: string; layout: Layout }[]>([]);
+  const [widgets, setWidgets] = useState<
+    { id: string; layout: Layout; component: React.FC }[]
+  >([]);
 
-  const availableWidgets = {
-    chart: {
-      component: ChartWidget,
-      layout: {
-        i: "chart",
-        x: 0,
-        y: 0,
-        w: 5,
-        h: 7,
-        minW: 4,
-        minH: 3,
-        isResizable: false,
-        isDraggable: true,
-        preventCollision: true,
-      },
-    },
-    diagram: {
-      component: DiagramWidget,
-      layout: {
-        i: "diagram",
-        x: 0,
-        y: 0,
-        w: 6,
-        h: 8,
-        minW: 4,
-        minH: 3,
-        isResizable: false,
-        isDraggable: true,
-
-        preventCollision: true,
-      },
-    },
-  };
-
+  // React DnD drop handler
   const [, drop] = useDrop(() => ({
     accept: "WIDGET",
     drop: (item: { id: string }) => {
-      const widgetData = availableWidgets[item.id];
-      if (widgetData) {
+      const widgetData = getWidgetById(item.id);
+      if (widgetData && !widgets.find((widget) => widget.id === item.id)) {
         setWidgets((prev) => [
           ...prev,
-          { id: item.id, layout: widgetData.layout },
+          {
+            id: item.id,
+            layout: {
+              ...widgetData.defaultLayout,
+              x: 0, // Reset position on drop
+              y: 0,
+            },
+            component: widgetData.component,
+          },
         ]);
       }
     },
   }));
+
+  // Capture layout changes during drag and resize
+  const handleLayoutChange = (newLayout: Layout[]) => {
+    setWidgets((prevWidgets) =>
+      prevWidgets.map((widget) => {
+        const updatedLayout = newLayout.find(
+          (layout) => layout.i === widget.id
+        );
+        return updatedLayout ? { ...widget, layout: updatedLayout } : widget;
+      })
+    );
+  };
+
+  // Capture final position after drag stops
+  const handleDragStop = (
+    layout: Layout[],
+    oldItem: Layout,
+    newItem: Layout
+  ) => {
+    setWidgets((prevWidgets) =>
+      prevWidgets.map((widget) =>
+        widget.id === newItem.i ? { ...widget, layout: newItem } : widget
+      )
+    );
+  };
 
   return (
     <div ref={drop} className="p-8 bg-gray-100 min-h-screen w-full">
@@ -66,15 +67,16 @@ const Dashboard: React.FC = () => {
         cols={{ lg: 12 }}
         rowHeight={30}
         isDraggable
+        isResizable
+        layouts={{ lg: widgets.map((widget) => widget.layout) }}
+        onLayoutChange={handleLayoutChange}
+        onDragStop={handleDragStop}
       >
-        {widgets.map(({ id, layout }) => {
-          const WidgetComponent = availableWidgets[id].component;
-          return (
-            <div key={id} data-grid={layout}>
-              <WidgetComponent /> {/* Render the widget */}
-            </div>
-          );
-        })}
+        {widgets.map(({ id, layout, component: WidgetComponent }) => (
+          <div key={id} data-grid={layout}>
+            <WidgetComponent />
+          </div>
+        ))}
       </ResponsiveGridLayout>
     </div>
   );
