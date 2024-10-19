@@ -13,7 +13,6 @@ const Dashboard: React.FC = () => {
     { id: string; layout: Layout; component: React.FC }[]
   >([]);
 
-  // React DnD drop handler
   const [, drop] = useDrop(() => ({
     accept: "WIDGET",
     drop: (item: { id: string }) => {
@@ -25,7 +24,7 @@ const Dashboard: React.FC = () => {
             id: item.id,
             layout: {
               ...widgetData.defaultLayout,
-              x: 0, // Reset position on drop
+              x: 0,
               y: 0,
             },
             component: widgetData.component,
@@ -61,14 +60,13 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div ref={drop} className="p-8 bg-gray-100 min-h-screen w-full">
+    <div ref={drop} className="p-8 bg-gray-100 min-h-screen w-3/4 m-auto">
       <ResponsiveGridLayout
         className="layout"
-        breakpoints={{ lg: 1200 }}
-        cols={{ lg: 12 }}
+        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+        cols={{ lg: 14, md: 12, sm: 8, xs: 4, xxs: 2 }}
         rowHeight={30}
         isDraggable
-        isResizable
         layouts={{ lg: widgets.map((widget) => widget.layout) }}
         onLayoutChange={handleLayoutChange}
         onDragStop={handleDragStop}

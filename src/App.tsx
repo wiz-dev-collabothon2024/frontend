@@ -1,25 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import Dashboard from "./components/Dashboard";
 import WidgetMenu from "./components/WidgetMenu";
+import Dashboard from "./components/Dashboard";
 
 const App: React.FC = () => {
-  const handleWidgetDrop = () => {
-    // You can add additional logic here if needed
+  const [isMenuVisible, setIsMenuVisible] = useState(true);
+
+  const toggleMenu = () => {
+    setIsMenuVisible((prev) => !prev);
   };
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="flex bg-gray-100">
+      <div className="flex bg-gray-100 min-h-screen">
         {/* Side Menu Section */}
-        <aside className="w-1/4 bg-gray-200 p-4">
-          <h2 className="text-xl mb-2">Available Widgets</h2>
-          <WidgetMenu onWidgetDrop={handleWidgetDrop} />
-        </aside>
+        {isMenuVisible && (
+          <aside className="w-1/4 bg-gray-200 p-4">
+            <h2 className="text-xl mb-2">Available Widgets</h2>
+            <WidgetMenu />
+          </aside>
+        )}
 
         {/* Main Dashboard Section */}
-        <div className="flex-1">
+        <div className={`flex-1 ${isMenuVisible ? "" : "w-full"}`}>
           <header className="flex justify-between bg-gray-800 text-white p-4">
             <div className="logo">COMMERZBANK</div>
             <nav>
@@ -30,12 +34,17 @@ const App: React.FC = () => {
               </ul>
             </nav>
             <div className="top-right">
-              <span>Kontakt</span>
-              <span>photoTAN</span>
+              <button
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                onClick={toggleMenu}
+              >
+                {isMenuVisible ? "Hide Menu" : "Show Menu"}
+              </button>
             </div>
           </header>
-          <h1 className="w-auto m-auto p-8 text-center text-2xl">
-            Your widgets
+
+          <h1 className="w-full m-auto p-8 text-center text-2xl">
+            Your Widgets
           </h1>
           <Dashboard />
         </div>

@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 import { useDrag } from "react-dnd";
-
-const initialWidgets = [
-  { id: "chart", name: "Chart Widget" },
-  { id: "diagram", name: "Diagram Widget" },
-];
+import { getAllWidgets } from "@/types/widgetRegistry"; // Import widget data
 
 const WidgetMenu: React.FC = () => {
-  const [availableWidgets, setAvailableWidgets] = useState(initialWidgets);
+  const [availableWidgets, setAvailableWidgets] = useState(getAllWidgets());
 
-  // Remove widget from the menu after successful drop
   const handleWidgetRemove = (id: string) => {
     setAvailableWidgets((prevWidgets) =>
       prevWidgets.filter((widget) => widget.id !== id)
