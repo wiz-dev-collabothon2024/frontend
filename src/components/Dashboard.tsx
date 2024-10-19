@@ -4,7 +4,6 @@ import { useDrop } from "react-dnd";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import { getWidgetById } from "@/types/widgetRegistry";
-import Widget from "@/components/Widget"; // Import Widget component
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -26,7 +25,7 @@ const Dashboard: React.FC<DashboardProps> = ({
   const [layout, setLayout] = useState<Layout[]>(
     widgets.map((widget) => ({ ...widget.layout, i: widget.id }))
   );
-  const [draggingWidget, setDraggingWidget] = useState<null | string>(null);
+  const [draggingWidget, setDraggingWidget] = useState<null | string>(null); // To visualize dragging
 
   // Use Drop to handle dropping widgets from the WidgetMenu
   const [{ isOver }, drop] = useDrop({
@@ -38,28 +37,21 @@ const Dashboard: React.FC<DashboardProps> = ({
         ?.getBoundingClientRect();
 
       if (clientOffset && containerBounds) {
-        const gridX = Math.max(
-          0,
-          Math.floor(
-            (clientOffset.x - containerBounds.left) /
-              (containerBounds.width / 14)
-          )
+        const gridX = Math.floor(
+          (clientOffset.x - containerBounds.left) / (containerBounds.width / 14)
         );
-        const gridY = Math.max(
-          0,
-          Math.floor((clientOffset.y - containerBounds.top) / 30)
-        );
+        const gridY = Math.floor((clientOffset.y - containerBounds.top) / 30);
 
         // Set a temporary placeholder layout to indicate where the widget would land
         const placeholderLayout = {
           i: item.id,
-          x: gridX,
-          y: gridY,
+          x: Math.max(0, gridX),
+          y: Math.max(0, gridY),
           w: 5,
           h: 3,
         };
 
-        setDraggingWidget(item.id);
+        setDraggingWidget(item.id); // Set dragging widget to visualize it
         setLayout((prevLayout) => [
           ...prevLayout.filter((l) => l.i !== item.id),
           placeholderLayout,
@@ -68,37 +60,31 @@ const Dashboard: React.FC<DashboardProps> = ({
     },
     drop: (item: { id: string }, monitor) => {
       const widgetData = getWidgetById(item.id);
-      const clientOffset = monitor.getClientOffset();
-      const containerBounds = document
-        .querySelector(".layout")
-        ?.getBoundingClientRect();
-
       if (widgetData && !widgets.find((widget) => widget.id === item.id)) {
+        const clientOffset = monitor.getClientOffset();
+        const containerBounds = document
+          .querySelector(".layout")
+          ?.getBoundingClientRect();
+
         if (clientOffset && containerBounds) {
-          const gridX = Math.max(
-            0,
-            Math.floor(
-              (clientOffset.x - containerBounds.left) /
-                (containerBounds.width / 14)
-            )
+          const gridX = Math.floor(
+            (clientOffset.x - containerBounds.left) /
+              (containerBounds.width / 14)
           );
-          const gridY = Math.max(
-            0,
-            Math.floor((clientOffset.y - containerBounds.top) / 30)
-          );
+          const gridY = Math.floor((clientOffset.y - containerBounds.top) / 30);
 
           onWidgetAdd(
             item.id,
             {
               ...widgetData.defaultLayout,
-              x: gridX,
-              y: gridY,
+              x: Math.max(0, gridX),
+              y: Math.max(0, gridY),
             },
             widgetData.component
           );
         }
       }
-      setDraggingWidget(null);
+      setDraggingWidget(null); // Reset dragging state on drop
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
@@ -125,9 +111,7 @@ const Dashboard: React.FC<DashboardProps> = ({
       >
         {widgets.map(({ id, layout, component: WidgetComponent }) => (
           <div key={id} data-grid={layout} className="relative">
-            <Widget>
-              <WidgetComponent />
-            </Widget>
+            <WidgetComponent />
             {isMenuVisible && (
               <button
                 className="absolute top-0 right-0 bg-red-500 text-white p-1"
