@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   ComposedChart,
   BarChart,
@@ -114,6 +114,13 @@ const FinanceWidget: React.FC = () => {
     }
   };
 
+  const [animateTable, setAnimateTable] = useState(false);
+
+  useEffect(() => {
+    // Start the animation after the component mounts
+    setAnimateTable(true);
+  }, []);
+
   return (
     <div>
       <h2 className="text-2xl font-bold">Cash Management</h2>
@@ -207,6 +214,7 @@ const FinanceWidget: React.FC = () => {
         >
           {/* Left Column ("Category" column) */}
           <div
+          className={`table-container ${animateTable ? "animate" : ""}`}
             style={{ flex: 1 }}
             ref={leftTableRef}
             onScroll={handleScroll}
@@ -231,6 +239,7 @@ const FinanceWidget: React.FC = () => {
           </div>
           {/* Right Column (Months data columns) */}
           <div
+          className={`table-container ${animateTable ? "animate" : ""}`}
             style={{
               flex: 5,
               paddingLeft: "29px", // Hardcoded to align, don't touch
