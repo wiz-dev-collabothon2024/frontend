@@ -236,7 +236,7 @@ const FinanceWidget: React.FC = () => {
           <div
             style={{
               flex: 5,
-              paddingLeft: "76px", // Hardcoded to align, don't touch
+              paddingLeft: "57px", // Hardcoded to align, don't touch
             }}
             ref={rightTableRef}
             onScroll={handleScroll}
