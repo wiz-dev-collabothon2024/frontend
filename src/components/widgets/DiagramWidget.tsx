@@ -20,31 +20,63 @@ const COLORS = [
   "#20B2AA",
 ];
 
+const dataMock = [
+  {
+      "account": "First account",
+      "balance": 5836482
+  },
+  {
+      "account": "Second account",
+      "balance": 15104856
+  },
+  {
+      "account": "Third account",
+      "balance": 55536433
+  },
+  {
+      "account": "Fourth account",
+      "balance": 1536433
+  },
+  {
+      "account": "Fifth account",
+      "balance": 32957611
+  },
+  {
+      "account": "Sixth account",
+      "balance": 13954414
+  },
+  {
+      "account": "Seventh account",
+      "balance": 55957001
+  }
+];
+
 const DiagramWidget: React.FC = () => {
   const [data, setData] = useState<{ account: string; balance: number }[]>([]);
   const [title, setTitle] = useState("Account Balances");
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const endpoint: string = "http://127.0.0.1:8000/api/main-balance-get";
-        const token: string = "accessToken";
-        const response = await fetch(endpoint, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`, // Add Bearer token here
-            "Content-Type": "application/json", // Optional, depending on your backend requirements
-          },
-          mode: "cors",
-        });
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        const result = await response.json();
-        setData(result); // Ensure your backend data matches the expected format
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      // try {
+      //   const endpoint: string = "http://127.0.0.1:8000/api/main-balance-get";
+      //   const token: string = "accessToken";
+      //   const response = await fetch(endpoint, {
+      //     method: "GET",
+      //     headers: {
+      //       Authorization: `Bearer ${token}`, // Add Bearer token here
+      //       "Content-Type": "application/json", // Optional, depending on your backend requirements
+      //     },
+      //     mode: "cors",
+      //   });
+      //   if (!response.ok) {
+      //     throw new Error("Failed to fetch data");
+      //   }
+      //   const result = await response.json();
+      //   setData(result); // Ensure your backend data matches the expected format
+      // } catch (error) {
+      //   console.error("Error fetching data:", error);
+      // }
+      setData(dataMock);
     };
 
     fetchData();

@@ -26,8 +26,9 @@ const Dashboard: React.FC<DashboardProps> = ({
   const [layout, setLayout] = useState<Layout[]>(
     widgets.map((widget) => ({ ...widget.layout, i: widget.id }))
   );
-  const [draggingWidget, setDraggingWidget] = useState<null | string>(null); // To visualize dragging
-  const cols: number = 12;
+  const [draggingWidget, setDraggingWidget] = useState<null | string>(null);
+  const cols: number = 14;
+
   // Use Drop to handle dropping widgets from the WidgetMenu
   const [{ isOver }, drop] = useDrop({
     accept: "WIDGET",
@@ -52,7 +53,7 @@ const Dashboard: React.FC<DashboardProps> = ({
           h: 3,
         };
 
-        setDraggingWidget(item.id); // Set dragging widget to visualize it
+        setDraggingWidget(item.id);
         setLayout((prevLayout) => [
           ...prevLayout.filter((l) => l.i !== item.id),
           placeholderLayout,
@@ -85,7 +86,7 @@ const Dashboard: React.FC<DashboardProps> = ({
           );
         }
       }
-      setDraggingWidget(null); // Reset dragging state on drop
+      setDraggingWidget(null);
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
@@ -96,21 +97,21 @@ const Dashboard: React.FC<DashboardProps> = ({
     setLayout((prevLayout) =>
       prevLayout.map((widgetLayout) =>
         widgetLayout.i === id
-          ? { ...widgetLayout, isDraggable: !disable }
+          ? { ...widgetLayout, isDraggable: !disable, isResizable: !disable }
           : widgetLayout
       )
     );
   };
+
   const handleWidgetRemove = (id: string) => {
-    onWidgetRemove(id); // Remove the widget
+    onWidgetRemove(id);
   };
 
   const handleLayoutChange = (newLayout: Layout[]) => {
     setLayout(newLayout);
-    onLayoutChange(newLayout); // Update layout in the parent
+    onLayoutChange(newLayout);
   };
 
-  // Dynamically update the draggable and resizable states based on `isMenuVisible`
   const updatedLayout = useMemo(
     () =>
       layout.map((widgetLayout) => ({
@@ -121,13 +122,12 @@ const Dashboard: React.FC<DashboardProps> = ({
     [layout, isMenuVisible]
   );
 
-  // Render the grid layout with draggable/resizable widgets
   const memoizedGridLayout = useMemo(() => {
     return (
       <ResponsiveGridLayout
         className="layout"
-        breakpoints={{ lg: 1400, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: cols, md: 12, sm: 8, xs: 4, xxs: 2 }}
+        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+        cols={{ lg: cols, md: 14, sm: 8, xs: 4, xxs: 2 }}
         rowHeight={30}
         layouts={{ lg: updatedLayout }}
         onLayoutChange={handleLayoutChange}
@@ -139,7 +139,8 @@ const Dashboard: React.FC<DashboardProps> = ({
             key={id}
             data-grid={{
               ...layout,
-              isDraggable: isMenuVisible,
+              isDraggable: isMenuVisible, // Draggable based on menu visibility
+              isResizable: isMenuVisible, // Resizable based on menu visibility
             }}
             className="relative"
           >
@@ -187,7 +188,7 @@ const Dashboard: React.FC<DashboardProps> = ({
   return (
     <div
       ref={drop}
-      className="m-auto w-full min-h-screen lg:w-[1400px] md:w-[1096px] sm:w-[868px] xs-[580px]"
+      className="m-auto w-full min-h-screen lg:w-[1300px] md:w-[1096px] sm:w-[868px] xs-[580px]"
     >
       {memoizedGridLayout}
     </div>

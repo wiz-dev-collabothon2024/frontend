@@ -37,7 +37,7 @@ const ChartWidget: React.FC = () => {
 
   return (
     <>
-      <h2 className="text-2xl font-bold">Sales Chart</h2>
+      <h2 className="ml-3 text-2xl font-bold">Sales Chart</h2>
       <LineChart width={400} height={200} data={data}>
         <Line type="monotone" dataKey="value" stroke="#8884d8" />
         <XAxis dataKey="name" />
