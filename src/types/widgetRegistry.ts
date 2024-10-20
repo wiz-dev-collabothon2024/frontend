@@ -5,6 +5,7 @@ import DowntimeWidget from "@/components/widgets/DowntimeWidget";
 import ForexWidget from "@/components/widgets/ForexWidget";
 import { min } from "lodash";
 import LoanWidget from "@/components/widgets/LoanWidget";
+import CoinTapGame from "@/components/widgets/CoinTapGame";
 
 export const widgetRegistry = {
   chart: {
@@ -91,6 +92,20 @@ export const widgetRegistry = {
       x: 0,
       y: 0,
       w: 4,
+      h: 7,
+      isResizable: false,
+      isDraggable: true,
+      preventCollision: true,
+    },
+  },
+  hamster: {
+    name: "Game Widget", // Add names here
+    component: CoinTapGame,
+    defaultLayout: {
+      i: "coin",
+      x: 0,
+      y: 0,
+      w: 5,
       h: 7,
       isResizable: false,
       isDraggable: true,
