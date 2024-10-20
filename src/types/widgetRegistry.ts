@@ -3,6 +3,7 @@ import DiagramWidget from "@/components/widgets/DiagramWidget";
 import FinanceWidget from "@/components/widgets/FinanceWidget";
 import DowntimeWidget from "@/components/widgets/DowntimeWidget";
 import ForexWidget from "@/components/widgets/ForexWidget";
+import { min } from "lodash";
 import LoanWidget from "@/components/widgets/LoanWidget";
 
 export const widgetRegistry = {
@@ -15,6 +16,8 @@ export const widgetRegistry = {
       y: 0,
       w: 5,
       h: 7,
+      minW: 5,
+      minH: 7,
       isResizable: false,
       isDraggable: true,
       preventCollision: true,
@@ -29,6 +32,8 @@ export const widgetRegistry = {
       y: 0,
       w: 5,
       h: 8,
+      minW: 5,
+      minH: 8,
       isResizable: false,
       isDraggable: true,
       preventCollision: true,
@@ -57,6 +62,8 @@ export const widgetRegistry = {
       y: 0,
       w: 4,
       h: 5,
+      minW: 4,
+      minH: 5,
       isResizable: false,
       isDraggable: true,
       preventCollision: true,
@@ -71,6 +78,8 @@ export const widgetRegistry = {
       y: 0,
       w: 4,
       h: 5,
+      minW: 4,
+      minH: 5,
       isResizable: false,
       isDraggable: true,
       preventCollision: true,
