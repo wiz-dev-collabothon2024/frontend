@@ -41,7 +41,7 @@ export const widgetRegistry = {
       x: 0,
       y: 0,
       w: 20,
-      h: 15,
+      h: 12,
       isResizable: false,
       isDraggable: true,
       preventCollision: true,
