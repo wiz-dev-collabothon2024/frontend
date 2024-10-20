@@ -241,3 +241,30 @@
 .animate-zoom {
   animation: zoom 1.5s ease;
 }
+
+@keyframes vibrate_coin {
+  0% {
+    transform: rotate(0deg);
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: rotate(2deg);
+    transform: translate(2px, -2px);
+  }
+  50% {
+    transform: rotate(0eg);
+    transform: translate(-2px, 2px);
+  }
+  75% {
+    transform: rotate(-2deg);
+    transform: translate(2px, 2px);
+  }
+  100% {
+    transform: rotate(0deg);
+    transform: translate(0, 0);
+  }
+}
+
+.vibrate_coin {
+  animation: vibrate_coin 0.1s ease-in-out;
+}

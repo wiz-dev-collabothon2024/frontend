@@ -16,7 +16,9 @@ const animationTypes = ["float", "coin-bounce", "rotate", "fade", "zoom"];
 const CoinTapGame: React.FC = () => {
   const [animations, setAnimations] = useState<Animation[]>([]); // For tracking animations
   const [score, setScore] = useState(0); // For tracking score
-  const [showPrize, setShowPrize] = useState(false); // To show the prize form after 1000 clicks
+  const [showPrize, setShowPrize] = useState(false); // To show the prize form after 100 clicks
+  const [vibrate, setVibrate] = useState(false); // For triggering vibration on score
+  const [coinAnimation, setCoinAnimation] = useState(false); // To animate the coin on click
 
   const getRandomAnimationType = () => {
     return animationTypes[Math.floor(Math.random() * animationTypes.length)];
@@ -31,13 +33,23 @@ const CoinTapGame: React.FC = () => {
     setScore((prevScore) => {
       const newScore = prevScore + 1;
 
-      // Check if the user reaches 1000 taps to show the prize
+      // Check if the user reaches 100 clicks to show the prize
       if (newScore === 100) {
         setShowPrize(true);
       }
 
       return newScore;
     });
+
+    // Trigger vibration when score updates
+    setVibrate(true);
+
+    // Animate the coin when clicked
+    setCoinAnimation(true);
+    setTimeout(() => setCoinAnimation(false), 200); // Reset animation after a short delay
+
+    // Reset vibration after a short delay
+    setTimeout(() => setVibrate(false), 200);
 
     // Get the coin's bounding box relative to its parent container
     const coinRect = e.currentTarget.getBoundingClientRect();
@@ -96,13 +108,19 @@ const CoinTapGame: React.FC = () => {
       <ToastContainer />
 
       {/* Score Counter */}
-      <div className="absolute top-1 left-0 font-bold text-md p-4 rounded-md">
+      <div
+        className={`absolute top-1 left-0 font-bold text-md p-4 rounded-md ${
+          vibrate ? "vibrate_coin" : ""
+        }`}
+      >
         Score: {score}
       </div>
 
       {/* Main Coin in the center */}
       <div
-        className="relative cursor-pointer w-48 h-48 rounded-full flex items-center justify-center transform transition-transform duration-300"
+        className={`relative cursor-pointer w-48 h-48 rounded-full flex items-center justify-center transform transition-transform duration-300 ${
+          coinAnimation ? "vibrate_coin" : ""
+        }`}
         onClick={handleClick}
       >
         <img src={coin} alt="Coin" className="w-full h-full object-contain" />
@@ -118,7 +136,7 @@ const CoinTapGame: React.FC = () => {
         />
       ))}
 
-      {/* Show prize form when the player reaches 1000 clicks */}
+      {/* Show prize form when the player reaches 100 clicks */}
       {showPrize && (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-white rounded-lg shadow-lg flex flex-col items-center space-y-4">
           <h2 className="text-xl font-bold text-gray-800">
