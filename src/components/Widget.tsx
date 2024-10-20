@@ -28,7 +28,7 @@ const Widget: React.FC<WidgetProps> = ({ children, onRemove }) => {
 
   return (
     <div
-      className={`flex-grow shadow-xl text-primary select-none flex-shrink basis-1 p-6 w-auto h-full rounded-lg border bg-card ${
+      className={`flex-grow shadow-xl bg-gradient-to-t from-[#f3fcf7] to-[#f3fdf5] text-primary select-none flex-shrink basis-1 p-6 w-auto h-full rounded-3xl  ${
         isVibrating ? "vibrate_small" : ""
       }`} // Removed scale and hover effects
       onMouseDown={handleMouseDown} // Start vibrating when LMB is pressed

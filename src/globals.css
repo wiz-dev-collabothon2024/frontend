@@ -5,12 +5,12 @@
   :root {
     --background: linear-gradient(
       to top,
-      187 10% 94%,
-      130 10% 95%
-    ); /* Base background */
+      hsl(187, 10%, 94%),
+      hsl(130, 10%, 95%)
+    );
     --foreground: 156.2 5% 10%; /* Base text color */
     --header: 174 42% 26%;
-    --card: #f3fdf5; /* Cards background */
+    --card: linear-gradient(to top, #f3fcf7, #f3fdf5); /* Cards background */
     --card-foreground: 156.2 5% 15%;
     --popover: 156.2 100% 95%;
     --popover-foreground: 156.2 100% 10%;

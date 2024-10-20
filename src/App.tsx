@@ -104,10 +104,10 @@ const App: React.FC = () => {
           {/* Sidebar */}
           <div className="relative">
             <button
-              className="bg-primary text-white px-4 py-2 rounded-lg shadow-lg hover:bg-primary-dark m-4"
+              className="bg-gradient-to-t from-[#d6ecef] to-[#dbf3df] text-primary px-4 py-2 rounded-lg shadow-lg hover:bg-primary-dark m-4"
               onClick={toggleMenu}
             >
-              {isMenuVisible ? "Hide Menu" : "Show Menu"}
+              {isMenuVisible ? "Edit" : " Edit"}
             </button>
 
             <div
