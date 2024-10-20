@@ -267,6 +267,7 @@
 
 .vibrate_coin {
   animation: vibrate_coin 0.1s ease-in-out;
+}
 
 /* Add this to your global CSS file */
 @keyframes pulse {
