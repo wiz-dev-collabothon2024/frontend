@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import {
   ComposedChart,
+  BarChart,
   Bar,
   XAxis,
   YAxis,
@@ -90,8 +91,9 @@ const tableData = [
   },
 ];
 
-const currentBalance = 5856898;
-const euroSign = "€";
+  // Calculate the current balance (using the last balance value)
+  const currentBalance = 5856898;
+  const euroSign = "€";
 
 const FinanceWidget: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
@@ -114,11 +116,12 @@ const FinanceWidget: React.FC = () => {
 
   return (
     <Widget>
-      <div style={{ display: "flex", flexDirection: "column", height: "100%", flex: 1 }}>
+      <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
         {/* Top Row */}
-        <div style={{ display: "flex", flex: "0 0 40%" }}>
-          {/* Left Column (Current Balance) */}
-          <div
+        <div style={{ display: "flex", flex: "0 0 auto" }}>
+          {/* Left Column (Empty) */}
+           {/* Left Column (New Content) */}
+           <div
             style={{
               width: "200px",
               display: "flex",
@@ -127,29 +130,35 @@ const FinanceWidget: React.FC = () => {
               alignItems: "center",
             }}
           >
+            {/* First Line: Smaller Text */}
             <div style={{ fontSize: "14px", color: "#555" }}>Current Balance</div>
+            {/* Second Line: Larger, Green Text */}
             <div style={{ fontSize: "24px", color: "#4CAF50", fontWeight: "bold" }}>
               +{euroSign}
               {new Intl.NumberFormat().format(currentBalance)}
             </div>
           </div>
-          {/* Right Column (Chart) */}
-          <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-            <ResponsiveContainer width="100%" height="100%">
+          {/* Right Column (BarChart) */}
+          <div style={{ flex: 5 }}>
+            <ResponsiveContainer 
+            width="100%" 
+            height={200}
+            domain={[0, "auto"]}
+            >
               <ComposedChart data={data} barSize={20}>
-                {/* ... Chart Components ... */}
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis
                   tickFormatter={(value) => `${(value / 1e6).toFixed(1)}M`}
-                  domain={[0, "auto"]}
                 />
                 <Tooltip
                   formatter={(value) =>
                     new Intl.NumberFormat().format(value as number)
                   }
                 />
-                <Legend />
+                <Legend 
+                
+                />
                 <Bar dataKey="inflow" name="Cash Inflow" fill="#4CAF50">
                   {data.map((entry, index) => {
                     const month = months[index];
@@ -192,11 +201,21 @@ const FinanceWidget: React.FC = () => {
         </div>
 
         {/* Bottom Row */}
-        <div style={{ display: "flex", flex: "1 1 60%" }}>
+        <div
+          style={{ display: "flex", flex: "1 1 auto"}}
+        >
           {/* Left Column ("Category" column) */}
-          <div style={{ flex: 1, }} ref={leftTableRef} onScroll={handleScroll}>
-            <table className="w-full h-full border-collapse">
-              {/* Left Table Content */}
+          <div
+            style={{ flex: 1 }}
+            ref={leftTableRef}
+            onScroll={handleScroll}
+          >
+            <table className="w-full border-collapse">
+              {/* <thead>
+                <tr>
+                  <th className="border p-2 sticky top-0 bg-white">Category</th>
+                </tr>
+              </thead> */}
               <tbody>
                 {tableData.map((row, index) => (
                   <tr
@@ -217,13 +236,24 @@ const FinanceWidget: React.FC = () => {
           <div
             style={{
               flex: 5,
-              paddingLeft: "76px",
+              paddingLeft: "76px", // Hardcoded to align, don't touch
             }}
             ref={rightTableRef}
             onScroll={handleScroll}
           >
-            <table className="w-full h-full border-collapse text-left">
-              {/* Right Table Content */}
+            <table className="w-full border-collapse text-left">
+              {/* <thead>
+                <tr>
+                  {months.map((month) => (
+                    <th
+                      key={month}
+                      className="border p-2 capitalize sticky top-0 bg-white"
+                    >
+                      {month}
+                    </th>
+                  ))}
+                </tr>
+              </thead> */}
               <tbody>
                 {tableData.map((row, index) => (
                   <tr
