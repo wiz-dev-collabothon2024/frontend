@@ -40,7 +40,7 @@ export const widgetRegistry = {
       i: "overview",
       x: 0,
       y: 0,
-      w: 20,
+      w: 9,
       h: 12,
       isResizable: false,
       isDraggable: true,

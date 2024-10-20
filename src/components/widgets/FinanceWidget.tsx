@@ -123,7 +123,7 @@ const FinanceWidget: React.FC = () => {
            {/* Left Column (New Content) */}
            <div
             style={{
-              width: "200px",
+              width: "150px",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
