@@ -111,8 +111,8 @@ const App: React.FC = () => {
             </button>
 
             <div
-              className={`absolute left-0 top-16 bg-white shadow-lg rounded-lg p-4 transition-all duration-500 ease-in-out ${
-                isMenuVisible ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+              className={`absolute left-4 top-16 shadow-lg rounded-lg w-[220px] transition-all duration-500 ease-in-out ${
+                isMenuVisible ? " opacity-100" : "max-h-0 opacity-0"
               } overflow-hidden`}
             >
               <WidgetMenu
