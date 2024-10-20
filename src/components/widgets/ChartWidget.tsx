@@ -26,13 +26,13 @@ const ChartWidget: React.FC = () => {
   const handleMouseLeave = () => {};
 
   const data = [
-    { name: "Jan", value: 4000 },
-    { name: "Feb", value: 3000 },
-    { name: "Mar", value: 2000 },
-    { name: "Apr", value: 2780 },
-    { name: "May", value: 1890 },
-    { name: "Jun", value: 2390 },
-    { name: "Jul", value: 3490 },
+    { name: "Apr", value: 13.04 },
+    { name: "May", value: 15.06 },
+    { name: "Jun", value: 14.27 },
+    { name: "Jul", value: 14.92 },
+    { name: "Aug", value: 12.76 },
+    { name: "Sep", value: 15.60 },
+    { name: "Oct", value: 16.76 },
   ];
 
   return (

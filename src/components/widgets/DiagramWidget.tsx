@@ -21,32 +21,32 @@ const COLORS = [
 
 const dataMock = [
   {
-    account: "First account",
-    balance: 5836482,
+    account: "Deposits",
+    balance: 1245,
   },
   {
-    account: "Second account",
-    balance: 15104856,
+    account: "Stocks",
+    balance: 12005,
   },
   {
-    account: "Third account",
-    balance: 55536433,
+    account: "Investment Products",
+    balance: 7890,
   },
   {
-    account: "Fourth account",
-    balance: 1536433,
+    account: "Loans",
+    balance: 4567,
   },
   {
-    account: "Fifth account",
-    balance: 32957611,
+    account: "Other accounts",
+    balance: 1234,
   },
   {
-    account: "Sixth account",
-    balance: 13954414,
+    account: "Accounts",
+    balance: 13008,
   },
   {
-    account: "Seventh account",
-    balance: 55957001,
+    account: "Credit Cards",
+    balance: 5678,
   },
 ];
 

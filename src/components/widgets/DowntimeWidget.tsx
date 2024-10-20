@@ -4,8 +4,8 @@ const StatusWidget: React.FC = () => {
   // Mocked data for the ETA and service state for each service
   const services = [
     { name: "Corporate-payments", status: "up" },
-    { name: "Securities", status: "fatal", eta: "6h" },
-    { name: "Customers", status: "issues", eta: "2h" },
+    { name: "Securities", status: "fatal", eta: "3h" },
+    { name: "Customers", status: "issues", eta: "0.5h" },
     { name: "Swift GPI Transactions", status: "up" },
   ];
 
