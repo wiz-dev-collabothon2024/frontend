@@ -128,7 +128,7 @@ const Dashboard: React.FC<DashboardProps> = ({
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
         cols={{ lg: 14, md: 12, sm: 8, xs: 4, xxs: 2 }}
         rowHeight={30}
-        layouts={{ lg: updatedLayout }} // Use updated layout
+        layouts={{ lg: updatedLayout }}
         onLayoutChange={handleLayoutChange}
         useCSSTransforms={true}
         preventCollision={false}
@@ -138,33 +138,30 @@ const Dashboard: React.FC<DashboardProps> = ({
             key={id}
             data-grid={{
               ...layout,
-              isDraggable: isMenuVisible, // Dynamically set draggable based on menu visibility
-              // isResizable: isMenuVisible, // Handle resizing
+              isDraggable: isMenuVisible,
             }}
             className="relative"
           >
             <Widget>
               <WidgetComponent />
-              {/* Show delete button only when the menu is visible */}
               {isMenuVisible && (
                 <button
-                  className="absolute top-0 right-0 bg-red-500 text-primary p-1"
+                  className="absolute top-4 right-4 text-[#8b9392] hover:text-gray-700 p-2"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleWidgetRemove(id);
                   }}
-                  onMouseEnter={() => disableDraggableOnHover(id, true)} // Disable dragging when hovering
-                  onMouseLeave={() => disableDraggableOnHover(id, false)} // Re-enable dragging when mouse leaves
+                  onMouseEnter={() => disableDraggableOnHover(id, true)}
+                  onMouseLeave={() => disableDraggableOnHover(id, false)}
                   data-no-drag
                 >
-                  X
+                  <span className="text-[21px] font-bold">X</span>
                 </button>
               )}
             </Widget>
           </div>
         ))}
 
-        {/* Render a ghost widget when dragging */}
         {draggingWidget && isOver && (
           <div
             key={draggingWidget}
@@ -177,7 +174,7 @@ const Dashboard: React.FC<DashboardProps> = ({
       </ResponsiveGridLayout>
     );
   }, [
-    updatedLayout, // Updated layout now based on menu visibility
+    updatedLayout,
     widgets,
     isMenuVisible,
     onWidgetRemove,

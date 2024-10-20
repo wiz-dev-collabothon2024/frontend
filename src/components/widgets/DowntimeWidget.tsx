@@ -43,7 +43,7 @@ const StatusWidget: React.FC = () => {
     <div className="relative">
       {/* Header with Servers State and question mark */}
       <div className="flex items-center mb-1 space-x-5">
-        <h2 className="text-3xl font-semibold text-[#274340]">Servers State</h2>
+        <h2 className="text-3xl font-semibold text-[#274340] py-1">Servers State</h2>
         <div
           className="bg-[#274340] w-9 h-9 rounded-lg flex items-center justify-center cursor-pointer ml-1"
           onClick={() => setShowTooltip(!showTooltip)}
@@ -82,11 +82,14 @@ const StatusWidget: React.FC = () => {
         );
 
         return (
-          <div key={index} className="flex items-center justify-between py-1">
+          <div
+            key={index}
+            className="flex items-center justify-between py-0.6" // Added margin-left for indentation
+          >
             <p className="text-lg font-normal text-[#55706d]">{service.name}</p>
             <div className="flex items-center space-x-2">
               {service.eta && (
-                <span className="text-sm text-gray-300 mr-2 text-[#55706d]">
+                <span className="text-sm text-[#8b9392] mr-2 text-[#55706d]">
                   ~{service.eta}
                 </span>
               )}
