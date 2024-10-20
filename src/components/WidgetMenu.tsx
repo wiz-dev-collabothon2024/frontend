@@ -75,7 +75,6 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
 
   // Map images based on widget title
   const getImageForWidget = (title: string) => {
-    console.log(title);
     switch (title) {
       case "Diagram Widget":
         return chartImg;
