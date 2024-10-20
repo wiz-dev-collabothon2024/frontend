@@ -15,13 +15,14 @@ import {
 import Widget from "../Widget";
 import "./FinanceWidget.css";
 
+const startBalance = 4856898;
 const data = [
-  { name: "Jan", inflow: 4048916, outflow: 3541021, balance: 5017895 },  // Add balance
-  { name: "Feb", inflow: 4539844, outflow: 4388736, balance: 1511108 },  // Add balance
-  { name: "Mar", inflow: 4839006, outflow: 4436615, balance: 4023191 },  // Add balance
-  { name: "Apr", inflow: 5336000, outflow: 5306615, balance: 2932285 },   // Add balance
-  { name: "May", inflow: 6305000, outflow: 4836705, balance: 1468295 }, // Add balance
-  { name: "Jun", inflow: 4836705, outflow: 4836705, balance: 1213255 },       // Add balance
+  { name: "Jan", inflow: 4048916, outflow: 3541021, balance: startBalance},  // Add balance
+  { name: "Feb", inflow: 5539844, outflow: 4388736, balance: startBalance + 1500000},  // Add balance
+  { name: "Mar", inflow: 5390060, outflow: 4036615, balance: startBalance + 2500000},  // Add balance
+  { name: "Apr", inflow: 4236000, outflow: 6306615, balance: 2932285 },   
+  { name: "May", inflow: 6305000, outflow: 4836705, balance: startBalance + 1000000 },       // Add balance
+  { name: "Jun", inflow: 4836705, outflow: 4836705, balance: startBalance + 1000000 },       // Add balance
 ];
 
 const tableData = [
@@ -91,7 +92,7 @@ const tableData = [
 ];
 
   // Calculate the current balance (using the last balance value)
-  const currentBalance = 21376890;
+  const currentBalance = 5856898;
   const euroSign = "€";
 
 const FinanceWidget: React.FC = () => {
@@ -139,7 +140,11 @@ const FinanceWidget: React.FC = () => {
           </div>
           {/* Right Column (BarChart) */}
           <div style={{ flex: 5 }}>
-            <ResponsiveContainer width="100%" height={200}>
+            <ResponsiveContainer 
+            width="100%" 
+            height={200}
+            domain={[0, "auto"]}
+            >
               <ComposedChart data={data} barSize={20}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
