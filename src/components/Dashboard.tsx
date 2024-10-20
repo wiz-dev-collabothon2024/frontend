@@ -27,7 +27,7 @@ const Dashboard: React.FC<DashboardProps> = ({
     widgets.map((widget) => ({ ...widget.layout, i: widget.id }))
   );
   const [draggingWidget, setDraggingWidget] = useState<null | string>(null); // To visualize dragging
-
+  const cols: number = 19;
   // Use Drop to handle dropping widgets from the WidgetMenu
   const [{ isOver }, drop] = useDrop({
     accept: "WIDGET",
@@ -39,7 +39,8 @@ const Dashboard: React.FC<DashboardProps> = ({
 
       if (clientOffset && containerBounds) {
         const gridX = Math.floor(
-          (clientOffset.x - containerBounds.left) / (containerBounds.width / 14)
+          (clientOffset.x - containerBounds.left) /
+            (containerBounds.width / cols)
         );
         const gridY = Math.floor((clientOffset.y - containerBounds.top) / 30);
 
@@ -69,7 +70,7 @@ const Dashboard: React.FC<DashboardProps> = ({
         if (clientOffset && containerBounds) {
           const gridX = Math.floor(
             (clientOffset.x - containerBounds.left) /
-              (containerBounds.width / 15)
+              (containerBounds.width / cols)
           );
           const gridY = Math.floor((clientOffset.y - containerBounds.top) / 30);
 
@@ -125,8 +126,8 @@ const Dashboard: React.FC<DashboardProps> = ({
     return (
       <ResponsiveGridLayout
         className="layout"
-        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 15, md: 12, sm: 8, xs: 4, xxs: 2 }}
+        breakpoints={{ lg: 1400, md: 996, sm: 768, xs: 480, xxs: 0 }}
+        cols={{ lg: cols, md: 12, sm: 8, xs: 4, xxs: 2 }}
         rowHeight={30}
         layouts={{ lg: updatedLayout }}
         onLayoutChange={handleLayoutChange}
@@ -186,7 +187,7 @@ const Dashboard: React.FC<DashboardProps> = ({
   return (
     <div
       ref={drop}
-      className="p-8 min-h-screen lg:w-[1300px] md:w-[1096px] sm:w-[868px] xs-[580px]"
+      className="m-auto w-full min-h-screen lg:w-[1400px] md:w-[1096px] sm:w-[868px] xs-[580px]"
     >
       {memoizedGridLayout}
     </div>

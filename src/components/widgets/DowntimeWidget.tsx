@@ -83,7 +83,7 @@ const StatusWidget: React.FC = () => {
 
         return (
           <div key={index} className="flex items-center justify-between py-0.6">
-            <p className="text-[18.5px] font-normal text-[#55706d]">
+            <p className="text-[17px] font-normal text-[#55706d]">
               {service.name}
             </p>
             <div className="flex items-center space-x-2">
