@@ -146,7 +146,7 @@ const Dashboard: React.FC<DashboardProps> = ({
               <WidgetComponent />
               {isMenuVisible && (
                 <button
-                  className="absolute top-4 right-4 text-[#8b9392] hover:text-gray-700 p-2"
+                  className="absolute top-5 right-4 text-[#8b9392] hover:text-gray-700 p-2"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleWidgetRemove(id);

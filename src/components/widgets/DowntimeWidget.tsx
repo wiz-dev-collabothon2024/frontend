@@ -45,7 +45,7 @@ const StatusWidget: React.FC = () => {
       <div className="flex items-center mb-1 space-x-5">
         <h2 className="text-2xl font-bold text-primary py-1">Servers State</h2>
         <div
-          className="bg-[#274340] w-9 h-9 rounded-lg flex items-center justify-center cursor-pointer ml-1"
+          className="bg-[#274340] w-7 h-7 rounded-lg flex items-center justify-center cursor-pointer ml-1"
           onClick={() => setShowTooltip(!showTooltip)}
         >
           <span className="text-white font-bold">?</span>
@@ -88,7 +88,7 @@ const StatusWidget: React.FC = () => {
             </p>
             <div className="flex items-center space-x-2">
               {service.eta && (
-                <span className="text-sm text-gray-300 mr-2 text-[#55706d]">
+                <span className="text-sm text-gray-300 mr-2 text-[#828a8a]">
                   ~{service.eta}
                 </span>
               )}
