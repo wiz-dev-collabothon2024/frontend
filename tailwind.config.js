@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
     darkMode: ["class"],
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -50,8 +51,12 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
-  		}
+  		},
+		  fontFamily: {
+			sans: ['"Open Sans"', 'sans-serif'],
+		}
   	}
   },
   plugins: [require("tailwindcss-animate")],
+  
 };
