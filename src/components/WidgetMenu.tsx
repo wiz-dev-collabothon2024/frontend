@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useDrag } from "react-dnd";
 
+// Import images directly
+import chartImg from "@/assets/menu/chart.png";
+import financeImg from "@/assets/menu/finance.png";
+import serverDowntimeImg from "@/assets/menu/server_downtime.png";
+
 interface WidgetMenuProps {
   availableWidgets: { id: string; name: string }[];
   onWidgetRemove: (id: string) => void;
@@ -11,7 +16,7 @@ const WidgetMenu: React.FC<WidgetMenuProps> = ({
   onWidgetRemove,
 }) => {
   return (
-    <div className="flex flex-col space-y-3 bg-gradient-to-t from-[#d6ecef] to-[#dbf3df] p-4 rounded-xl shadow-lg">
+    <div className="bg-gradient-to-t from-[#d6ecef] to-[#dbf3df] p-4 rounded-xl shadow-lg w-auto space-y-3">
       {availableWidgets.length === 0 ? (
         <p>No available widgets</p>
       ) : (
@@ -65,19 +70,18 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
 
   // Map images based on widget title
   const getImageForWidget = (title: string) => {
+    console.log(title);
     switch (title) {
-      case "Servers State":
-        return "server.png";
-      case "DownTime":
-        return "downtime.png";
-      case "Diagram":
-        return "chart.png";
-      case "Finance":
-        return "finance.png";
-      case "Prediction":
-        return "prediction.png";
+      case "Diagram Widget":
+        return chartImg;
+      case "Downtime Widget":
+        return serverDowntimeImg;
+      case "Chart Widget":
+        return chartImg;
+      case "Forex Widget":
+        return financeImg;
       default:
-        return "default.png"; // Fallback image
+        return financeImg; // Fallback image if any
     }
   };
 
@@ -90,11 +94,8 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
     >
-      <img
-        src={`/menu/${getImageForWidget(title)}`}
-        alt={title}
-        className="w-8 h-8"
-      />
+      <img src={getImageForWidget(title)} alt={title} className="w-8 h-8" />
+
       <p className="text-primary font-semibold">{title}</p>
     </div>
   );
