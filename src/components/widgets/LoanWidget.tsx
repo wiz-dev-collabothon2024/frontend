@@ -56,7 +56,11 @@ const LoanWidget: React.FC = () => {
   };
 
   if (loading) {
-    return <h2 className="text-2xl font-bold mb-2 text-[#274340]"> Loading...</h2>; // Display loading state
+    return (
+      <div className="flex justify-center items-center h-full">
+        <div className="pulsating-logo">jhvjhvf</div> {/* Pulsating logo during loading */}
+      </div>
+    ); // Display loading state
   }
 
   if (error) {

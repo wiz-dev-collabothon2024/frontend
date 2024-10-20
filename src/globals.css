@@ -132,3 +132,25 @@
 .vibrate_small {
   animation: vibrate_small 0.6s linear infinite;
 }
+
+/* Add this to your global CSS file */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulsating-logo {
+  width: 50px; /* Adjust as needed */
+  height: 50px; /* Adjust as needed */
+  background-color: #4CAF50; /* Replace with the color or background you want */
+  border-radius: 50%; /* Make it circular */
+  display: inline-block;
+  animation: pulse 1.5s infinite ease-in-out; /* Pulsating animation */
+}
