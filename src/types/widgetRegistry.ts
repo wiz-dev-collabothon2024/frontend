@@ -74,7 +74,7 @@ export const widgetRegistry = {
       i: "forex",
       x: 0,
       y: 0,
-      w: 3.7,
+      w: 4,
       h: 5,
       minW: 4,
       minH: 5,

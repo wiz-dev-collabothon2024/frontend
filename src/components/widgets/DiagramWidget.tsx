@@ -7,17 +7,16 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import Widget from "../Widget";
 
 const COLORS = [
-  "#0088FE",
-  "#00C49F",
-  "#FFBB28",
-  "#FF8042",
-  "#FF6347",
-  "#6A5ACD",
-  "#FF69B4",
-  "#20B2AA",
+  "#ff0000",
+  "#f78e1e",
+  "#ffc000",
+  "#d7f3ff",
+  "#0070c0",
+  "#7030a0",
+  "#32b347",
+  "#5eff1f",
 ];
 
 const dataMock = [

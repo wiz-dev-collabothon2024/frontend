@@ -104,14 +104,14 @@ const App: React.FC = () => {
           {/* Sidebar */}
           <div className="absolute">
             <button
-              className="bg-gradient-to-t from-[#d6ecef] to-[#dbf3df] text-primary px-4 py-2 rounded-lg shadow-lg hover:bg-primary-dark m-4"
+              className="bg-gradient-to-t from-[#d6ecef] to-[#dbf3df] text-primary px-4 py-2 rounded-lg shadow-lg hover:bg-primary-dark m-4 mt-8"
               onClick={toggleMenu}
             >
               {isMenuVisible ? "Edit" : " Edit"}
             </button>
 
             <div
-              className={`absolute left-4 top-16 shadow-lg rounded-lg w-[220px] transition-all duration-500 ease-in-out ${
+              className={`absolute left-4 top-20 shadow-lg rounded-lg w-[220px] transition-all duration-500 ease-in-out ${
                 isMenuVisible ? " opacity-100" : "max-h-0 opacity-0"
               } overflow-hidden`}
             >
@@ -125,10 +125,10 @@ const App: React.FC = () => {
 
           {/* Dashboard Section */}
           {initialized && (
-            <div className={"flex-1 transition-all duration-1000 "}>
-              <h1 className="w-full m-auto pb-2 text-center text-2xl text-header font-bold">
+            <div className={"flex-1 mt-8 transition-all duration-1000 "}>
+              {/* <h1 className="w-full mt-2 m-auto font-semibold pb-2 text-center text-2xl text-header">
                 Your Widgets
-              </h1>
+              </h1> */}
               <div className="w-4/5 pt-4 m-auto rounded-3xl shadow-lg bg-gradient-to-t from-[#d6ecef] to-[#dbf3df]">
                 <Dashboard
                   widgets={dashboardWidgets}
