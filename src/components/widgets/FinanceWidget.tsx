@@ -282,7 +282,7 @@ const FinanceWidget: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
+    </Widget>
   );
 };
 
