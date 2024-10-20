@@ -26,7 +26,7 @@ export const widgetRegistry = {
     },
   },
   diagram: {
-    name: "Diagram Widget", // Add names here
+    name: "Account Balances Widget", // Add names here
     component: DiagramWidget,
     defaultLayout: {
       i: "diagram",
