@@ -9,21 +9,23 @@ import {
   Legend,
   ResponsiveContainer,
   Cell,
+  Line,
 } from "recharts";
 import Widget from "../Widget";
+import "./FinanceWidget.css";
 
 const data = [
-  { name: "Jan", inflow: 4048916, outflow: 3541021 },
-  { name: "Feb", inflow: 4539844, outflow: 4388736 },
-  { name: "Mar", inflow: 4839006, outflow: 4436615 },
-  { name: "Apr", inflow: 5336000, outflow: 5306615 },
-  { name: "May", inflow: 6305000, outflow: 4836705 },
-  { name: "Jun", inflow: 4836705, outflow: 4836705 },
+  { name: "Jan", inflow: 4048916, outflow: 3541021, balance: 5017895 },  // Add balance
+  { name: "Feb", inflow: 4539844, outflow: 4388736, balance: 1511108 },  // Add balance
+  { name: "Mar", inflow: 4839006, outflow: 4436615, balance: 4023191 },  // Add balance
+  { name: "Apr", inflow: 5336000, outflow: 5306615, balance: 2932285 },   // Add balance
+  { name: "May", inflow: 6305000, outflow: 4836705, balance: 1468295 }, // Add balance
+  { name: "Jun", inflow: 4836705, outflow: 4836705, balance: 1213255 },       // Add balance
 ];
 
 const tableData = [
   {
-    category: "Cash balance at the beginning of the month",
+    category: "Balance  ",
     jan: "4,116,898",
     feb: "4,015,790",
     mar: "4,724,787",
@@ -51,12 +53,12 @@ const tableData = [
   },
   {
     subCategory: "Loans",
-    jan: "0",
-    feb: "0",
-    mar: "0",
-    apr: "0",
-    may: "0",
-    jun: "0",
+    jan: "2,668,542",
+    feb: "4,53 9,844",
+    mar: "4,811,006",
+    apr: "3,336,000",
+    may: "6,305,123",
+    jun: "4,821,705",
   },
   {
     category: "Cash outflow",
@@ -87,6 +89,10 @@ const tableData = [
   },
 ];
 
+  // Calculate the current balance (using the last balance value)
+  const currentBalance = 21376890;
+  const euroSign = "€";
+
 const FinanceWidget: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
 
@@ -112,10 +118,27 @@ const FinanceWidget: React.FC = () => {
         {/* Top Row */}
         <div style={{ display: "flex", flex: "0 0 auto" }}>
           {/* Left Column (Empty) */}
-          <div style={{ flex: 1 }}></div>
+           {/* Left Column (New Content) */}
+           <div
+            style={{
+              width: "200px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {/* First Line: Smaller Text */}
+            <div style={{ fontSize: "14px", color: "#555" }}>Current Balance</div>
+            {/* Second Line: Larger, Green Text */}
+            <div style={{ fontSize: "24px", color: "#4CAF50", fontWeight: "bold" }}>
+              +{euroSign}
+              {new Intl.NumberFormat().format(currentBalance)}
+            </div>
+          </div>
           {/* Right Column (BarChart) */}
           <div style={{ flex: 5 }}>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={200}>
               <BarChart data={data} barSize={20}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
@@ -127,8 +150,10 @@ const FinanceWidget: React.FC = () => {
                     new Intl.NumberFormat().format(value as number)
                   }
                 />
-                <Legend />
-                <Bar dataKey="inflow" name="Cash Inflow">
+                <Legend 
+                
+                />
+                <Bar dataKey="inflow" name="Cash Inflow" fill="#4CAF50">
                   {data.map((entry, index) => {
                     const month = months[index];
                     return (
@@ -141,7 +166,7 @@ const FinanceWidget: React.FC = () => {
                     );
                   })}
                 </Bar>
-                <Bar dataKey="outflow" name="Cash Outflow">
+                <Bar dataKey="outflow" name="Cash Outflow" fill="#F44336">
                   {data.map((entry, index) => {
                     const month = months[index];
                     return (
@@ -161,20 +186,20 @@ const FinanceWidget: React.FC = () => {
 
         {/* Bottom Row */}
         <div
-          style={{ display: "flex", flex: "1 1 auto", overflow: "hidden" }}
+          style={{ display: "flex", flex: "1 1 auto"}}
         >
           {/* Left Column ("Category" column) */}
           <div
-            style={{ flex: 1, overflowY: "auto" }}
+            style={{ flex: 1 }}
             ref={leftTableRef}
             onScroll={handleScroll}
           >
             <table className="w-full border-collapse">
-              <thead>
+              {/* <thead>
                 <tr>
                   <th className="border p-2 sticky top-0 bg-white">Category</th>
                 </tr>
-              </thead>
+              </thead> */}
               <tbody>
                 {tableData.map((row, index) => (
                   <tr
@@ -195,15 +220,13 @@ const FinanceWidget: React.FC = () => {
           <div
             style={{
               flex: 5,
-              overflowX: "auto",
-              overflowY: "auto",
-              paddingLeft: "76px", // Adjust the value as needed
+              paddingLeft: "76px", // Hardcoded to align, don't touch
             }}
             ref={rightTableRef}
             onScroll={handleScroll}
           >
             <table className="w-full border-collapse text-left">
-              <thead>
+              {/* <thead>
                 <tr>
                   {months.map((month) => (
                     <th
@@ -214,7 +237,7 @@ const FinanceWidget: React.FC = () => {
                     </th>
                   ))}
                 </tr>
-              </thead>
+              </thead> */}
               <tbody>
                 {tableData.map((row, index) => (
                   <tr

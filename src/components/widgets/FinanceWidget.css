@@ -1,11 +1,12 @@
 /* Add this CSS to your stylesheet */
 
 tr {
-    height: 40px; /* Adjust as needed */
+    height: 30px; /* Adjust as needed */
   }
   
   td, th {
     vertical-align: middle;
+    line-height: 5px;
   }
   
   .left-column table th, .left-column table td {
@@ -15,3 +16,4 @@ tr {
   .right-column table th, .right-column table td {
     min-width: 100px; /* Adjust as needed */
   }
+
