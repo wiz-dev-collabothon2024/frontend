@@ -5,6 +5,7 @@ import { useDrag } from "react-dnd";
 import chartImg from "@/assets/menu/chart.png";
 import financeImg from "@/assets/menu/finance.png";
 import serverDowntimeImg from "@/assets/menu/server_downtime.png";
+import emailsImg from "@/assets/mail.png";
 
 interface WidgetMenuProps {
   availableWidgets: { id: string; name: string }[];
@@ -80,6 +81,8 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
         return chartImg;
       case "Forex Widget":
         return financeImg;
+      case "Emails Widget":
+        return emailsImg;
       default:
         return financeImg; // Fallback image if any
     }
