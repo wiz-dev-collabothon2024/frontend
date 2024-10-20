@@ -43,7 +43,7 @@ const StatusWidget: React.FC = () => {
     <div className="relative">
       {/* Header with Servers State and question mark */}
       <div className="flex items-center mb-1 space-x-5">
-        <h2 className="text-3xl font-semibold text-[#274340] py-1">Servers State</h2>
+        <h2 className="text-2xl font-bold text-primary py-1">Servers State</h2>
         <div
           className="bg-[#274340] w-9 h-9 rounded-lg flex items-center justify-center cursor-pointer ml-1"
           onClick={() => setShowTooltip(!showTooltip)}
@@ -54,7 +54,7 @@ const StatusWidget: React.FC = () => {
 
       {/* Tooltip showing total time */}
       {showTooltip && (
-        <div className="absolute top-0 left-0 mt-8 p-4 bg-gray-800 text-white rounded-md shadow-lg opacity-90 z-10">
+        <div className="absolute top-0 left-0 mt-8 p-4 bg-gray-800 text-white rounded-3xl shadow-lg opacity-90 z-10">
           <div className="flex items-center mb-2">
             <div className="w-4 h-4 rounded-full bg-green-500 mr-2"></div>
             <span className="text-[#55706d]">Service is working properly</span>
@@ -82,14 +82,13 @@ const StatusWidget: React.FC = () => {
         );
 
         return (
-          <div
-            key={index}
-            className="flex items-center justify-between py-0.6" // Added margin-left for indentation
-          >
-            <p className="text-lg font-normal text-[#55706d]">{service.name}</p>
+          <div key={index} className="flex items-center justify-between py-0.6">
+            <p className="text-[18.5px] font-normal text-[#55706d]">
+              {service.name}
+            </p>
             <div className="flex items-center space-x-2">
               {service.eta && (
-                <span className="text-sm text-[#8b9392] mr-2 text-[#55706d]">
+                <span className="text-sm text-gray-300 mr-2 text-[#55706d]">
                   ~{service.eta}
                 </span>
               )}

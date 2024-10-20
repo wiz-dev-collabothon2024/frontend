@@ -12,7 +12,7 @@ export const widgetRegistry = {
       i: "chart",
       x: 0,
       y: 0,
-      w: 7,
+      w: 6,
       h: 7,
       isResizable: false,
       isDraggable: true,

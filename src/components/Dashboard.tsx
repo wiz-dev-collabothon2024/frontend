@@ -69,7 +69,7 @@ const Dashboard: React.FC<DashboardProps> = ({
         if (clientOffset && containerBounds) {
           const gridX = Math.floor(
             (clientOffset.x - containerBounds.left) /
-              (containerBounds.width / 14)
+              (containerBounds.width / 15)
           );
           const gridY = Math.floor((clientOffset.y - containerBounds.top) / 30);
 
@@ -126,7 +126,7 @@ const Dashboard: React.FC<DashboardProps> = ({
       <ResponsiveGridLayout
         className="layout"
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 14, md: 12, sm: 8, xs: 4, xxs: 2 }}
+        cols={{ lg: 15, md: 12, sm: 8, xs: 4, xxs: 2 }}
         rowHeight={30}
         layouts={{ lg: updatedLayout }}
         onLayoutChange={handleLayoutChange}
@@ -186,7 +186,7 @@ const Dashboard: React.FC<DashboardProps> = ({
   return (
     <div
       ref={drop}
-      className="p-8 min-h-screen lg:w-[1300px] md:w-[1096px] sm:w-[868px] xs-[580px] m-auto"
+      className="p-8 min-h-screen lg:w-[1300px] md:w-[1096px] sm:w-[868px] xs-[580px]"
     >
       {memoizedGridLayout}
     </div>
