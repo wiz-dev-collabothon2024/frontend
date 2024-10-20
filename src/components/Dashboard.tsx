@@ -91,21 +91,6 @@ const Dashboard: React.FC<DashboardProps> = ({
     }),
   });
 
-  // Function to temporarily disable draggable when hovering over remove button
-  const disableDraggableOnHover = (id: string, disable: boolean) => {
-    setLayout((prevLayout) =>
-      prevLayout.map((widgetLayout) =>
-        widgetLayout.i === id
-          ? { ...widgetLayout, isDraggable: !disable }
-          : widgetLayout
-      )
-    );
-  };
-
-  const handleWidgetRemove = (id: string) => {
-    onWidgetRemove(id); // Remove the widget
-  };
-
   const handleLayoutChange = (newLayout: Layout[]) => {
     setLayout(newLayout);
     onLayoutChange(newLayout); // Update layout in the parent
