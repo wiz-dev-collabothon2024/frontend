@@ -111,6 +111,17 @@ const Dashboard: React.FC<DashboardProps> = ({
     onLayoutChange(newLayout); // Update layout in the parent
   };
 
+  // Dynamically update the draggable and resizable states based on `isMenuVisible`
+  const updatedLayout = useMemo(
+    () =>
+      layout.map((widgetLayout) => ({
+        ...widgetLayout,
+        isDraggable: isMenuVisible, // Draggable only when the menu is visible
+        isResizable: isMenuVisible, // Resizable only when the menu is visible
+      })),
+    [layout, isMenuVisible]
+  );
+
   // Render the grid layout with draggable/resizable widgets
   const memoizedGridLayout = useMemo(() => {
     return (
@@ -119,27 +130,19 @@ const Dashboard: React.FC<DashboardProps> = ({
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
         cols={{ lg: 14, md: 12, sm: 8, xs: 4, xxs: 2 }}
         rowHeight={30}
-        layouts={{ lg: layout }}
+        layouts={{ lg: updatedLayout }} // Use updated layout
         onLayoutChange={handleLayoutChange}
         useCSSTransforms={true}
         preventCollision={false}
       >
         {widgets.map(({ id, layout, component: WidgetComponent }) => (
-          <div
-            key={id}
-            data-grid={{
-              ...layout,
-              isDraggable: isMenuVisible && layout.isDraggable, // Dynamically set draggable based on menu visibility
-              isResizable: isMenuVisible && layout.isResizable, // Handle resizing
-            }}
-            className="relative"
-          >
+          <div key={id} data-grid={layout} className="relative">
             <Widget>
               <WidgetComponent />
               {/* Show delete button only when the menu is visible */}
               {isMenuVisible && (
                 <button
-                  className="absolute top-0 right-0 bg-red-500 text-white p-1"
+                  className="absolute top-0 right-0 bg-red-500 text-primary p-1"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleWidgetRemove(id);
@@ -168,7 +171,7 @@ const Dashboard: React.FC<DashboardProps> = ({
       </ResponsiveGridLayout>
     );
   }, [
-    layout,
+    updatedLayout, // Updated layout now based on menu visibility
     widgets,
     isMenuVisible,
     onWidgetRemove,
@@ -180,7 +183,7 @@ const Dashboard: React.FC<DashboardProps> = ({
   return (
     <div
       ref={drop}
-      className="p-8 bg-gray-100 min-h-screen lg:w-[1300px] md:w-[1096px] sm:w-[868px] xs-[580px] m-auto"
+      className="p-8 min-h-screen lg:w-[1300px] md:w-[1096px] sm:w-[868px] xs-[580px] m-auto"
     >
       {memoizedGridLayout}
     </div>
