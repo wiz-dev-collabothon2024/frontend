@@ -54,10 +54,10 @@ const StatusWidget: React.FC = () => {
 
       {/* Tooltip showing total time */}
       {showTooltip && (
-        <div className="absolute top-0 left-0 mt-8 p-4 bg-gray-800 text-white rounded-3xl shadow-lg opacity-90 z-10">
+        <div className="absolute top-0 left-0 mt-8 p-4 bg-[#36514d] text-white rounded-3xl shadow-lg opacity-90 z-10">
           <div className="flex items-center mb-2">
             <div className="w-4 h-4 rounded-full bg-green-500 mr-2"></div>
-            <span className="text-[#55706d]">Service is working properly</span>
+            <span>Service is working properly</span>
           </div>
           <div className="flex items-center mb-2">
             <div className="w-4 h-4 rounded-full bg-orange-500 mr-2"></div>
@@ -69,8 +69,8 @@ const StatusWidget: React.FC = () => {
           </div>
           <br></br>
           <div className="flex items-center">
-            <span className="text-[#55706d]">
-              ~h* Estimated time to fix an incident
+            <span>
+              ~h*   Estimated time to fix an incident
             </span>
           </div>
         </div>
