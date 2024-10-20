@@ -7,48 +7,47 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import Widget from "../Widget";
 
 const COLORS = [
-  "#0088FE",
-  "#00C49F",
-  "#FFBB28",
-  "#FF8042",
-  "#FF6347",
-  "#6A5ACD",
-  "#FF69B4",
-  "#20B2AA",
+  "#ff0000",
+  "#f78e1e",
+  "#ffc000",
+  "#d7f3ff",
+  "#0070c0",
+  "#7030a0",
+  "#32b347",
+  "#5eff1f",
 ];
 
 const dataMock = [
   {
-      "account": "First account",
-      "balance": 5836482
+    account: "First account",
+    balance: 5836482,
   },
   {
-      "account": "Second account",
-      "balance": 15104856
+    account: "Second account",
+    balance: 15104856,
   },
   {
-      "account": "Third account",
-      "balance": 55536433
+    account: "Third account",
+    balance: 55536433,
   },
   {
-      "account": "Fourth account",
-      "balance": 1536433
+    account: "Fourth account",
+    balance: 1536433,
   },
   {
-      "account": "Fifth account",
-      "balance": 32957611
+    account: "Fifth account",
+    balance: 32957611,
   },
   {
-      "account": "Sixth account",
-      "balance": 13954414
+    account: "Sixth account",
+    balance: 13954414,
   },
   {
-      "account": "Seventh account",
-      "balance": 55957001
-  }
+    account: "Seventh account",
+    balance: 55957001,
+  },
 ];
 
 const DiagramWidget: React.FC = () => {
@@ -103,7 +102,12 @@ const DiagramWidget: React.FC = () => {
               />
             ))}
           </Pie>
-          <Legend layout="vertical" align="right" verticalAlign="middle" />
+          <Legend
+            layout="vertical"
+            iconType="circle"
+            align="right"
+            verticalAlign="middle"
+          />
           <Tooltip />
         </PieChart>
       </ResponsiveContainer>

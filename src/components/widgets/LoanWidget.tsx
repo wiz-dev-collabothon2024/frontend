@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import logo from "@/assets/logo.png";
 
 const LoanWidget: React.FC = () => {
    // State to manage fetched data
@@ -58,7 +59,7 @@ const LoanWidget: React.FC = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-full">
-        <div className="pulsating-logo">jhvjhvf</div> {/* Pulsating logo during loading */}
+        <div className="pulsating-logo"><img src={logo}></img></div> {/* Pulsating logo during loading */}
       </div>
     ); // Display loading state
   }

@@ -4,6 +4,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import WidgetMenu from "./components/WidgetMenu";
 import Dashboard from "./components/Dashboard";
 import { getAllWidgets } from "@/types/widgetRegistry";
+import logo from "@/assets/logo.png";
 
 const App: React.FC = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -77,7 +78,7 @@ const App: React.FC = () => {
           <div className="flex items-center space-x-8">
             {/* Logo */}
             <div>
-              <img src="public/"></img>
+              <img src={logo} alt="logo" className="w-11" />
             </div>
             {/* Navigation */}
             <nav className="flex space-x-6 text-2xl">
@@ -95,7 +96,6 @@ const App: React.FC = () => {
           <div className="text-right flex items-center space-x-4">
             {/* Placeholder for additional icons/text if needed */}
             <span className="text-2xl font-semibold">Kontakt</span>
-            <span className="text-2xl font-semibold">photoTAN</span>
           </div>
         </header>
 
@@ -104,14 +104,14 @@ const App: React.FC = () => {
           {/* Sidebar */}
           <div className="absolute">
             <button
-              className="bg-gradient-to-t from-[#d6ecef] to-[#dbf3df] text-primary px-4 py-2 rounded-lg shadow-lg hover:bg-primary-dark m-4"
+              className="bg-gradient-to-t from-[#d6ecef] to-[#dbf3df] text-primary px-4 py-2 rounded-lg shadow-lg hover:bg-primary-dark m-4 mt-8"
               onClick={toggleMenu}
             >
               {isMenuVisible ? "Edit" : " Edit"}
             </button>
 
             <div
-              className={`absolute left-4 top-16 shadow-lg rounded-lg w-[220px] transition-all duration-500 ease-in-out ${
+              className={`absolute left-4 top-20 shadow-lg rounded-lg w-[220px] transition-all duration-500 ease-in-out ${
                 isMenuVisible ? " opacity-100" : "max-h-0 opacity-0"
               } overflow-hidden`}
             >
@@ -125,10 +125,10 @@ const App: React.FC = () => {
 
           {/* Dashboard Section */}
           {initialized && (
-            <div className={"flex-1 transition-all duration-1000 "}>
-              <h1 className="w-full m-auto pb-2 text-center text-2xl text-header font-bold">
+            <div className={"flex-1 mt-8 transition-all duration-1000 "}>
+              {/* <h1 className="w-full mt-2 m-auto font-semibold pb-2 text-center text-2xl text-header">
                 Your Widgets
-              </h1>
+              </h1> */}
               <div className="w-4/5 pt-4 m-auto rounded-3xl shadow-lg bg-gradient-to-t from-[#d6ecef] to-[#dbf3df]">
                 <Dashboard
                   widgets={dashboardWidgets}

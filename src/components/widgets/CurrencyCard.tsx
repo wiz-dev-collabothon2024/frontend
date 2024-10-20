@@ -13,7 +13,7 @@ const CurrencyCard: React.FC<CurrencyCardProps> = ({
 }) => {
   return (
     <>
-      <h2 className="text-2xl font-bold mb-2 text-[#274340]">{currency} Exchange Rates</h2>
+      <h2 className="text-2xl font-semibold mb-2 text-[#274340]">{currency} Exchange Rates</h2>
       <div className="flex justify-between items-start space-x-2">
         {/* Buy Box */}
         <div className="bg-[#98a596] rounded-l-3xl flex flex-col items-center flex-1 p-1">

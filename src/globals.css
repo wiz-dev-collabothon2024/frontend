@@ -133,13 +133,122 @@
   animation: vibrate_small 0.6s linear infinite;
 }
 
+/* Coin */
+@keyframes coin-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-coin-pop {
+  animation: coin-pop 0.5s ease;
+}
+
+@keyframes coin-bounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(20px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5) translateY(-20px);
+  }
+}
+
+.animate-coin-bounce {
+  animation: coin-bounce 1.5s ease;
+}
+
+@keyframes float {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
+.animate-float {
+  animation: float 1.5s ease;
+}
+
+@keyframes rotate {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(180deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(360deg) scale(0.5);
+  }
+}
+
+.animate-rotate {
+  animation: rotate 1.5s ease;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-fade {
+  animation: fade 1.5s ease;
+}
+
+@keyframes zoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+.animate-zoom {
+  animation: zoom 1.5s ease;
+}
+
 /* Add this to your global CSS file */
 @keyframes pulse {
   0% {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.1);
+    transform: scale(1.3);
   }
   100% {
     transform: scale(1);
@@ -149,7 +258,7 @@
 .pulsating-logo {
   width: 50px; /* Adjust as needed */
   height: 50px; /* Adjust as needed */
-  background-color: #4CAF50; /* Replace with the color or background you want */
+  /* background-color: #4CAF50; Replace with the color or background you want */
   border-radius: 50%; /* Make it circular */
   display: inline-block;
   animation: pulse 1.5s infinite ease-in-out; /* Pulsating animation */
