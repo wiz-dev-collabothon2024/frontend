@@ -18,3 +18,17 @@ tr {
     /* width: 20px; */
   }
 
+  /* Initial state: table is hidden and scaled down */
+.table-container {
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+/* Animated state: table is visible and scaled to full size */
+.table-container.animate {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
