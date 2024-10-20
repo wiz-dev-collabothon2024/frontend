@@ -9,7 +9,7 @@ import EmailsWidget from "@/components/widgets/EmailsWidget"; // Import the new 
 
 export const widgetRegistry = {
   chart: {
-    name: "Chart Widget", // Add names here
+    name: "Stocks Chart Widget", // Add names here
     component: ChartWidget,
     defaultLayout: {
       i: "chart",

@@ -6,6 +6,7 @@ import chartImg from "@/assets/menu/chart.png";
 import financeImg from "@/assets/menu/finance.png";
 import serverDowntimeImg from "@/assets/menu/server_downtime.png";
 import emailsImg from "@/assets/mail.png";
+import stocksImg from "@/assets/graph.png";
 
 interface WidgetMenuProps {
   availableWidgets: { id: string; name: string }[];
@@ -83,6 +84,8 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
         return financeImg;
       case "Emails Widget":
         return emailsImg;
+      case "Stocks Chart Widget":
+        return stocksImg;
       default:
         return financeImg; // Fallback image if any
     }
