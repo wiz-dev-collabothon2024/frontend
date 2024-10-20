@@ -139,7 +139,7 @@ const Dashboard: React.FC<DashboardProps> = ({
             data-grid={{
               ...layout,
               isDraggable: isMenuVisible, // Dynamically set draggable based on menu visibility
-              isResizable: isMenuVisible, // Handle resizing
+              // isResizable: isMenuVisible, // Handle resizing
             }}
             className="relative"
           >
