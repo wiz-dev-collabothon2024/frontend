@@ -115,7 +115,8 @@ const FinanceWidget: React.FC = () => {
   };
 
   return (
-    <Widget>
+    <div>
+      <h2 className="text-2xl font-bold">Cash Management</h2>
       <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
         {/* Top Row */}
         <div style={{ display: "flex", flex: "0 0 auto" }}>
@@ -211,16 +212,12 @@ const FinanceWidget: React.FC = () => {
             onScroll={handleScroll}
           >
             <table className="w-full border-collapse">
-              {/* <thead>
-                <tr>
-                  <th className="border p-2 sticky top-0 bg-white">Category</th>
-                </tr>
-              </thead> */}
               <tbody>
                 {tableData.map((row, index) => (
                   <tr
                     key={index}
                     className={row.subCategory ? "text-sm" : "font-bold"}
+                    style={{ backgroundColor: index % 2 === 0 ? "#00ff0" : "#ffffff" }}
                   >
                     <td
                       className={`border p-2 ${row.subCategory ? "pl-6" : ""}`}
@@ -236,30 +233,20 @@ const FinanceWidget: React.FC = () => {
           <div
             style={{
               flex: 5,
-              paddingLeft: "57px", // Hardcoded to align, don't touch
+              paddingLeft: "29px", // Hardcoded to align, don't touch
             }}
             ref={rightTableRef}
             onScroll={handleScroll}
           >
             <table className="w-full border-collapse text-left">
-              {/* <thead>
-                <tr>
-                  {months.map((month) => (
-                    <th
-                      key={month}
-                      className="border p-2 capitalize sticky top-0 bg-white"
-                    >
-                      {month}
-                    </th>
-                  ))}
-                </tr>
-              </thead> */}
               <tbody>
                 {tableData.map((row, index) => (
                   <tr
                     key={index}
                     className={row.subCategory ? "text-sm" : "font-bold"}
+                    style={{ backgroundColor: index % 2 === 0 ? "#00000" : "#ffffff" }}
                   >
+                    
                     {months.map((month) => (
                       <td
                         key={month}
@@ -269,7 +256,7 @@ const FinanceWidget: React.FC = () => {
                           backgroundColor:
                             selectedMonth === month
                               ? "rgba(173, 216, 230, 0.5)"
-                              : "white",
+                              : "inherit",
                         }}
                       >
                         {row[month] || ""}
@@ -282,7 +269,7 @@ const FinanceWidget: React.FC = () => {
           </div>
         </div>
       </div>
-    </Widget>
+    </div>
   );
 };
 
