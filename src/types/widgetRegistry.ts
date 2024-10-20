@@ -54,7 +54,7 @@ export const widgetRegistry = {
       i: "status",
       x: 0,
       y: 0,
-      w: 5,
+      w: 3.4,
       h: 6.5,
       isResizable: false,
     },
