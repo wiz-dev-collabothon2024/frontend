@@ -5,6 +5,7 @@ import DowntimeWidget from "@/components/widgets/DowntimeWidget";
 import ForexWidget from "@/components/widgets/ForexWidget";
 import { min } from "lodash";
 import LoanWidget from "@/components/widgets/LoanWidget";
+import EmailsWidget from "@/components/widgets/EmailsWidget"; // Import the new widget
 
 export const widgetRegistry = {
   chart: {
@@ -92,6 +93,20 @@ export const widgetRegistry = {
       y: 0,
       w: 4,
       h: 7,
+      isResizable: false,
+      isDraggable: true,
+      preventCollision: true,
+    },
+  },
+  emails: {
+    name: "Emails Widget", // Add names here
+    component: EmailsWidget,
+    defaultLayout: {
+      i: "emails",
+      x: 0,
+      y: 0,
+      w: 4,
+      h: 4.5,
       isResizable: false,
       isDraggable: true,
       preventCollision: true,
