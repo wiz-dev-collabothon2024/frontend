@@ -4,6 +4,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import WidgetMenu from "./components/WidgetMenu";
 import Dashboard from "./components/Dashboard";
 import { getAllWidgets } from "@/types/widgetRegistry";
+import logo from "@/assets/logo.png";
 
 const App: React.FC = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -77,7 +78,7 @@ const App: React.FC = () => {
           <div className="flex items-center space-x-8">
             {/* Logo */}
             <div>
-              <img src="public/"></img>
+              <img src={logo} alt="logo" className="w-11" />
             </div>
             {/* Navigation */}
             <nav className="flex space-x-6 text-2xl">
@@ -95,7 +96,6 @@ const App: React.FC = () => {
           <div className="text-right flex items-center space-x-4">
             {/* Placeholder for additional icons/text if needed */}
             <span className="text-2xl font-semibold">Kontakt</span>
-            <span className="text-2xl font-semibold">photoTAN</span>
           </div>
         </header>
 
