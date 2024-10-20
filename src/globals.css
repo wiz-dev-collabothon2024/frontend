@@ -3,50 +3,59 @@
 @tailwind utilities;
 @layer base {
   :root {
-    --background: 156.2 100% 95%;
-    --foreground: 156.2 5% 10%;
-    --card: 156.2 50% 90%;
+    --background: linear-gradient(
+      to top,
+      187 10% 94%,
+      130 10% 95%
+    ); /* Base background */
+    --foreground: 156.2 5% 10%; /* Base text color */
+    --header: 174 42% 26%;
+    --card: #f3fdf5; /* Cards background */
     --card-foreground: 156.2 5% 15%;
     --popover: 156.2 100% 95%;
     --popover-foreground: 156.2 100% 10%;
-    --primary: 156.2 71.6% 66.9%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 156.2 30% 70%;
-    --secondary-foreground: 0 0% 0%;
-    --muted: 118.19999999999999 30% 85%;
+    --primary: #274340; /* Primary button color */
+    --primary-foreground: 0 0% 0%; /* Text on primary button */
+    --secondary: 156.2 30% 70%; /* Secondary button */
+    --secondary-foreground: 0 0% 0%; /* Text on secondary */
+    --muted: 118.19999999999999 30% 85%; /* Muted color */
     --muted-foreground: 156.2 5% 35%;
-    --accent: 118.19999999999999 30% 80%;
-    --accent-foreground: 156.2 5% 15%;
-    --destructive: 0 100% 30%;
-    --destructive-foreground: 156.2 5% 90%;
-    --border: 156.2 30% 50%;
-    --input: 156.2 30% 26%;
-    --ring: 156.2 71.6% 66.9%;
-    --radius: 0.5rem;
+    --accent: 118.19999999999999 30% 80%; /* Accent color */
+    --accent-foreground: 156.2 5% 15%; /* Text on accent */
+    --destructive: 0 100% 30%; /* Destructive action (e.g., delete button) */
+    --destructive-foreground: 156.2 5% 90%; /* Text on destructive */
+    --border: 156.2 30% 50%; /* Border color */
+    --input: 156.2 30% 26%; /* Input fields */
+    --ring: 156.2 71.6% 66.9%; /* Focused ring color */
+    --radius: 0.5rem; /* Border radius */
+    --qm: #285252; /* Custom color */
   }
+
+  /* Dark mode or opposite theme */
   .dark {
-    --background: 156.2 50% 10%;
-    --foreground: 156.2 5% 90%;
-    --card: 156.2 50% 10%;
+    --background: 183 18% 80%; /* Opposite of the base background */
+    --foreground: 156.2 5% 90%; /* Light text on dark background */
+    --card: 183 18% 35%; /* Opposite of card */
     --card-foreground: 156.2 5% 90%;
-    --popover: 156.2 50% 5%;
-    --popover-foreground: 156.2 5% 90%;
-    --primary: 156.2 71.6% 66.9%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 156.2 30% 20%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 118.19999999999999 30% 25%;
-    --muted-foreground: 156.2 5% 60%;
-    --accent: 118.19999999999999 30% 25%;
-    --accent-foreground: 156.2 5% 90%;
-    --destructive: 0 100% 30%;
-    --destructive-foreground: 156.2 5% 90%;
-    --border: 156.2 30% 26%;
-    --input: 156.2 30% 26%;
-    --ring: 156.2 71.6% 66.9%;
+    --popover: 156.2 100% 5%;
+    --popover-foreground: 156.2 100% 90%;
+    --primary: 216 44% 20%; /* Opposite of the primary button */
+    --primary-foreground: 0 0% 100%; /* Light text on dark primary button */
+    --secondary: 340 40% 50%; /* Opposite of secondary button */
+    --secondary-foreground: 0 0% 100%; /* Light text on dark secondary */
+    --muted: 118.19999999999999 30% 20%; /* Opposite of muted */
+    --muted-foreground: 156.2 5% 60%; /* Opposite of muted text */
+    --accent: 118.19999999999999 30% 30%; /* Darker accent */
+    --accent-foreground: 156.2 5% 90%; /* Light text on accent */
+    --destructive: 0 100% 80%; /* Opposite of destructive */
+    --destructive-foreground: 156.2 5% 10%; /* Dark text on light destructive */
+    --border: 156.2 30% 26%; /* Opposite border */
+    --input: 156.2 30% 26%; /* Opposite input */
+    --ring: 216 71.6% 35%; /* Dark ring color */
     --radius: 0.5rem;
   }
 }
+
 @layer base {
   * {
     @apply border-border;

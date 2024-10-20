@@ -11,7 +11,7 @@ const App: React.FC = () => {
   const [dashboardWidgets, setDashboardWidgets] = useState<
     { id: string; layout: any; component: React.FC }[]
   >([]);
-  const [initialized, setInitialized] = useState(false); // Track initialization
+  const [initialized, setInitialized] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuVisible((prev) => !prev);
@@ -20,7 +20,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setInitialized(true);
-    }, 100); // Small delay to ensure DOM is loaded
+    }, 100);
 
     return () => clearTimeout(timer);
   }, []);
@@ -70,45 +70,79 @@ const App: React.FC = () => {
   };
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <div className="bg-gray-100 min-h-screen flex">
-        <div className="relative">
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 m-4"
-            onClick={toggleMenu}
-          >
-            {isMenuVisible ? "Hide Menu" : "Show Menu"}
-          </button>
-
-          <div
-            className={`absolute left-0 top-16 bg-gray-200 p-4 transition-all duration-500 ease-in-out ${
-              isMenuVisible ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-            } overflow-hidden`}
-          >
-            <WidgetMenu
-              availableWidgets={availableWidgets}
-              isMenuVisible={isMenuVisible} // Pass the visibility state here
-              onWidgetRemove={handleWidgetRemoveFromMenu}
-            />
+    <div className=" min-h-screen">
+      <DndProvider backend={HTML5Backend}>
+        {/* Header Section */}
+        <header className="bg-[#274340] text-white p-4 flex justify-between items-center shadow-md">
+          <div className="flex items-center space-x-8">
+            {/* Logo */}
+            <div>
+              <img src="public/"></img>
+            </div>
+            {/* Navigation */}
+            <nav className="flex space-x-6 text-lg">
+              <a href="#" className="hover:underline">
+                Privatkunden
+              </a>
+              <a href="#" className="hover:underline">
+                Unternehmenskunden
+              </a>
+              <a href="#" className="hover:underline">
+                Firmenkunden
+              </a>
+            </nav>
           </div>
+          <div className="text-right flex items-center space-x-4">
+            {/* Placeholder for additional icons/text if needed */}
+            <span className="text-xl font-semibold">Kontakt</span>
+            <span className="text-xl font-semibold">photoTAN</span>
+          </div>
+        </header>
+
+        {/* Main Layout */}
+        <div className="min-h-screen flex">
+          {/* Sidebar */}
+          <div className="relative">
+            <button
+              className="bg-primary text-white px-4 py-2 rounded-lg shadow-lg hover:bg-primary-dark m-4"
+              onClick={toggleMenu}
+            >
+              {isMenuVisible ? "Hide Menu" : "Show Menu"}
+            </button>
+
+            <div
+              className={`absolute left-0 top-16 bg-white shadow-lg rounded-lg p-4 transition-all duration-500 ease-in-out ${
+                isMenuVisible ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+              } overflow-hidden`}
+            >
+              <WidgetMenu
+                availableWidgets={availableWidgets}
+                isMenuVisible={isMenuVisible}
+                onWidgetRemove={handleWidgetRemoveFromMenu}
+              />
+            </div>
+          </div>
+
+          {/* Dashboard Section */}
+          {initialized && (
+            <div className={"flex-1 transition-all duration-1000 p-4 "}>
+              <h1 className="w-full m-auto p-8 text-center text-2xl text-header font-bold">
+                Your Widgets
+              </h1>
+              <div className=" w-3/4 m-auto p-8 rounded-3xl shadow-lg bg-gradient-to-t from-[#d6ecef] to-[#dbf3df]">
+                <Dashboard
+                  widgets={dashboardWidgets}
+                  onWidgetRemove={handleWidgetRemoveFromDashboard}
+                  onWidgetAdd={handleWidgetAddToDashboard}
+                  onLayoutChange={handleLayoutChange}
+                  isMenuVisible={isMenuVisible}
+                />
+              </div>
+            </div>
+          )}
         </div>
-
-        {initialized && (
-          <div className={"flex-1 transition-all duration-1000 p-4"}>
-            <h1 className="w-full m-auto p-8 text-center text-2xl">
-              Your Widgets
-            </h1>
-            <Dashboard
-              widgets={dashboardWidgets}
-              onWidgetRemove={handleWidgetRemoveFromDashboard}
-              onWidgetAdd={handleWidgetAddToDashboard}
-              onLayoutChange={handleLayoutChange}
-              isMenuVisible={isMenuVisible} // Pass the visibility state here
-            />
-          </div>
-        )}
-      </div>
-    </DndProvider>
+      </DndProvider>
+    </div>
   );
 };
 
