@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import CurrencyCard from "./CurrencyCard";
+import arrowLeft from "@/assets/arrow.png"; // Adjusted path for the left arrow
+import arrowRight from "@/assets/arrow.png"; // Adjusted path for the right arrow
 
 const currencyData = [
   { currency: "USD", buyRate: 0.9, sellRate: 1.1 },
@@ -30,14 +32,20 @@ const ForexWidget: React.FC = () => {
       {/* Left Arrow */}
       <button
         onClick={handlePrev}
-        className="p-2 focus:outline-none hover:bg-gray-200 rounded-full"
+        className="p-2 focus:outline-none hover:bg-gray-200 rounded-full flex items-center justify-center"
         aria-label="Previous Currency"
       >
-        &#8592;
+        <div className="flex items-end">
+          <img
+            src={arrowLeft}
+            alt="Previous"
+            className="w-10 h-10 transform rotate-180"
+          />
+        </div>
       </button>
 
       {/* Currency Card */}
-      <div className="flex-1 mx-2">
+      <div className="flex-1 mx-2 font-semibold text-[#274340]">
         <CurrencyCard
           currency={currentCurrency.currency}
           buyRate={currentCurrency.buyRate}
@@ -48,10 +56,16 @@ const ForexWidget: React.FC = () => {
       {/* Right Arrow */}
       <button
         onClick={handleNext}
-        className="p-2 focus:outline-none hover:bg-gray-200 rounded-full"
+        className="p-2 focus:outline-none hover:bg-gray-200 rounded-full flex items-center justify-center"
         aria-label="Next Currency"
       >
-        &#8594;
+        <div className="flex items-end">
+          <img
+            src={arrowRight}
+            alt="Next"
+            className="w-10 h-10"
+          />
+        </div>
       </button>
     </div>
   );
