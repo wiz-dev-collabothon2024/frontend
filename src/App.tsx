@@ -129,7 +129,7 @@ const App: React.FC = () => {
               <h1 className="w-full m-auto pb-2 text-center text-2xl text-header font-bold">
                 Your Widgets
               </h1>
-              <div className=" w-3/4 m-auto rounded-3xl shadow-lg bg-gradient-to-t from-[#d6ecef] to-[#dbf3df]">
+              <div className=" w-4/5 pt-4 m-auto rounded-3xl shadow-lg bg-gradient-to-t from-[#d6ecef] to-[#dbf3df]">
                 <Dashboard
                   widgets={dashboardWidgets}
                   onWidgetRemove={handleWidgetRemoveFromDashboard}
