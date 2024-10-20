@@ -40,12 +40,12 @@ const StatusWidget: React.FC = () => {
     .reduce((sum, service) => sum + parseInt(service.eta || "0"), 0);
 
   return (
-    <>
+    <div className="relative">
       {/* Header with Servers State and question mark */}
-      <div className="flex justify-start items-center mb-4 space-x-2">
-        <h2 className="text-3xl font-semibold ">Servers State</h2>
+      <div className="flex items-center mb-1 space-x-5">
+        <h2 className="text-3xl font-semibold text-[#274340]">Servers State</h2>
         <div
-          className="bg-[#285252] w-6 h-6 rounded-lg flex items-center justify-center cursor-pointer ml-1"
+          className="bg-[#274340] w-9 h-9 rounded-lg flex items-center justify-center cursor-pointer ml-1"
           onClick={() => setShowTooltip(!showTooltip)}
         >
           <span className="text-white font-bold">?</span>
@@ -55,7 +55,24 @@ const StatusWidget: React.FC = () => {
       {/* Tooltip showing total time */}
       {showTooltip && (
         <div className="absolute top-0 left-0 mt-8 p-4 bg-gray-800 text-white rounded-md shadow-lg opacity-90 z-10">
-          Total time left to fix the issues: ~{totalEstimatedTime}h
+          <div className="flex items-center mb-2">
+            <div className="w-4 h-4 rounded-full bg-green-500 mr-2"></div>
+            <span className="text-[#55706d]">Service is working properly</span>
+          </div>
+          <div className="flex items-center mb-2">
+            <div className="w-4 h-4 rounded-full bg-orange-500 mr-2"></div>
+            <span>Service has some minor issues</span>
+          </div>
+          <div className="flex items-center">
+            <div className="w-4 h-4 rounded-full bg-red-500 mr-2"></div>
+            <span>Service has a critical error</span>
+          </div>
+          <br></br>
+          <div className="flex items-center">
+            <span className="text-[#55706d]">
+              ~h* Estimated time to fix an incident
+            </span>
+          </div>
         </div>
       )}
 
@@ -66,10 +83,10 @@ const StatusWidget: React.FC = () => {
 
         return (
           <div key={index} className="flex items-center justify-between py-1">
-            <p className="ext-lg font-normal ">{service.name}</p>
+            <p className="text-lg font-normal text-[#55706d]">{service.name}</p>
             <div className="flex items-center space-x-2">
               {service.eta && (
-                <span className="text-sm text-gray-300 mr-2">
+                <span className="text-sm text-gray-300 mr-2 text-[#55706d]">
                   ~{service.eta}
                 </span>
               )}
@@ -80,7 +97,7 @@ const StatusWidget: React.FC = () => {
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 
