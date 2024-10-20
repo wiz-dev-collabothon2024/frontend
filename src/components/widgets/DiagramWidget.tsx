@@ -52,7 +52,7 @@ const DiagramWidget: React.FC = () => {
 
   return (
     <>
-      <h2 className="text-lg font-bold">{title}</h2>
+      <h2 className="text-2xl font-bold">{title}</h2>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
