@@ -13,7 +13,8 @@ const ChartWidget: React.FC = () => {
   const [isVibrating, setIsVibrating] = useState(false);
 
   const handleMouseDown = (event: React.MouseEvent) => {
-    if (event.button === 0) { // Check if the left mouse button is pressed
+    if (event.button === 0) {
+      // Check if the left mouse button is pressed
       setIsVibrating(true);
     }
   };
@@ -22,8 +23,7 @@ const ChartWidget: React.FC = () => {
     setIsVibrating(false);
   };
 
-  const handleMouseLeave = () => {
-  };
+  const handleMouseLeave = () => {};
 
   const data = [
     { name: "Jan", value: 4000 },
@@ -37,7 +37,7 @@ const ChartWidget: React.FC = () => {
 
   return (
     <>
-      <h2 className="text-lg font-bold">Sales Chart</h2>
+      <h2 className="text-2xl font-bold">Sales Chart</h2>
       <LineChart width={400} height={200} data={data}>
         <Line type="monotone" dataKey="value" stroke="#8884d8" />
         <XAxis dataKey="name" />
