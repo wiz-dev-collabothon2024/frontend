@@ -11,7 +11,7 @@ const WidgetMenu: React.FC<WidgetMenuProps> = ({
   onWidgetRemove,
 }) => {
   return (
-    <div>
+    <div className="flex flex-col space-y-3 bg-gradient-to-t from-[#d6ecef] to-[#dbf3df] p-4 rounded-xl shadow-lg">
       {availableWidgets.length === 0 ? (
         <p>No available widgets</p>
       ) : (
@@ -63,12 +63,39 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
     setIsVibrating(false);
   };
 
+  // Map images based on widget title
+  const getImageForWidget = (title: string) => {
+    switch (title) {
+      case "Servers State":
+        return "server.png";
+      case "DownTime":
+        return "downtime.png";
+      case "Diagram":
+        return "chart.png";
+      case "Finance":
+        return "finance.png";
+      case "Prediction":
+        return "prediction.png";
+      default:
+        return "default.png"; // Fallback image
+    }
+  };
+
   return (
     <div
       ref={drag}
-      className={`p-2 cursor-move ${isDragging ? "vibrate" : ""}`}
+      className={`flex items-center space-x-4 p-4 cursor-move bg-white rounded-lg shadow-md hover:shadow-lg transition-all ${
+        isDragging ? "opacity-50" : ""
+      }`}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
     >
-      <p>{title}</p>
+      <img
+        src={`/menu/${getImageForWidget(title)}`}
+        alt={title}
+        className="w-8 h-8"
+      />
+      <p className="text-primary font-semibold">{title}</p>
     </div>
   );
 };
