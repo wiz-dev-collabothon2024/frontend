@@ -24,7 +24,7 @@ const Widget: React.FC<WidgetProps> = ({ children, onRemove }) => {
 
   return (
     <div
-      className={`relative flex-grow shadow-xl text-primary select-none flex-shrink basis-1 p-6 w-auto h-full bg-gradient-to-t from-[#f3fcf7] to-[#f3fdf5] font-sans rounded-[40px] ${
+      className={`relative flex-grow shadow-xl text-primary select-none flex-shrink basis-1 p-6 w-auto h-full border bg-gradient-to-t from-[#f3fcf7] to-[#f3fdf5] font-sans rounded-[45px] ${
         isVibrating ? "vibrate_small" : ""
       }`} // Apply the vibration class when `isVibrating` is true
       onMouseDown={handleMouseDown}

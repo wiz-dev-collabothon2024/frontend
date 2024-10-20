@@ -43,9 +43,9 @@ const StatusWidget: React.FC = () => {
     <div className="relative">
       {/* Header with Servers State and question mark */}
       <div className="flex items-center mb-1 space-x-5">
-        <h2 className="text-2xl font-bold text-primary">Servers State</h2>
+        <h2 className="text-2xl font-bold text-primary py-1">Servers State</h2>
         <div
-          className="bg-[#274340] w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer ml-1"
+          className="bg-[#274340] w-7 h-7 rounded-lg flex items-center justify-center cursor-pointer ml-1"
           onClick={() => setShowTooltip(!showTooltip)}
         >
           <span className="text-white font-bold">?</span>
@@ -82,13 +82,13 @@ const StatusWidget: React.FC = () => {
         );
 
         return (
-          <div key={index} className="flex items-center justify-between py-1">
+          <div key={index} className="flex items-center justify-between py-0.6">
             <p className="text-[17px] font-normal text-[#55706d]">
               {service.name}
             </p>
             <div className="flex items-center space-x-2">
               {service.eta && (
-                <span className="text-sm text-gray-300 mr-2 ">
+                <span className="text-sm text-gray-300 mr-2 text-[#828a8a]">
                   ~{service.eta}
                 </span>
               )}
