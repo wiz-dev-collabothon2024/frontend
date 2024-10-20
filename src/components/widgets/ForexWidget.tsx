@@ -4,9 +4,9 @@ import arrowLeft from "@/assets/arrow.png"; // Adjusted path for the left arrow
 import arrowRight from "@/assets/arrow.png"; // Adjusted path for the right arrow
 
 const currencyData = [
-  { currency: "USD", buyRate: 0.9, sellRate: 1.1 },
-  { currency: "GBP", buyRate: 1.2, sellRate: 1.4 },
-  { currency: "PLN", buyRate: 0.2, sellRate: 0.3 },
+  { currency: "USD", buyRate: 1.09, sellRate: 0.99 },
+  { currency: "GBP", buyRate: 0.83, sellRate: 0.79 },
+  { currency: "PLN", buyRate: 0.232, sellRate: 0.228 },
   // Add more currencies as needed
 ];
 
