@@ -40,9 +40,9 @@ const StatusWidget: React.FC = () => {
     .reduce((sum, service) => sum + parseInt(service.eta || "0"), 0);
 
   return (
-    <div className="relative">
+    <div className="mx-3 relative">
       {/* Header with Servers State and question mark */}
-      <div className="flex items-center mb-1 space-x-5">
+      <div className=" flex items-center mb-1 space-x-5">
         <h2 className="text-2xl font-bold text-primary py-1">Servers State</h2>
         <div
           className="bg-[#274340] w-7 h-7 rounded-lg flex items-center justify-center cursor-pointer ml-1"

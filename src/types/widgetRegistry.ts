@@ -3,6 +3,7 @@ import DiagramWidget from "@/components/widgets/DiagramWidget";
 import FinanceWidget from "@/components/widgets/FinanceWidget";
 import DowntimeWidget from "@/components/widgets/DowntimeWidget";
 import ForexWidget from "@/components/widgets/ForexWidget";
+import LoanWidget from "@/components/widgets/LoanWidget";
 
 export const widgetRegistry = {
   chart: {
@@ -12,7 +13,7 @@ export const widgetRegistry = {
       i: "chart",
       x: 0,
       y: 0,
-      w: 6,
+      w: 5,
       h: 7,
       isResizable: false,
       isDraggable: true,
@@ -40,8 +41,8 @@ export const widgetRegistry = {
       i: "overview",
       x: 0,
       y: 0,
-      w: 9,
-      h: 12,
+      w: 5,
+      h: 20,
       isResizable: false,
       isDraggable: true,
       preventCollision: true,
@@ -54,9 +55,11 @@ export const widgetRegistry = {
       i: "status",
       x: 0,
       y: 0,
-      w: 3.4,
-      h: 5.5,
+      w: 4,
+      h: 5,
       isResizable: false,
+      isDraggable: true,
+      preventCollision: true,
     },
   },
   forex: {
@@ -68,6 +71,20 @@ export const widgetRegistry = {
       y: 0,
       w: 4,
       h: 5,
+      isResizable: false,
+      isDraggable: true,
+      preventCollision: true,
+    },
+  },
+  loan: {
+    name: "Loan Widget", // Add names here
+    component: LoanWidget,
+    defaultLayout: {
+      i: "loan",
+      x: 0,
+      y: 0,
+      w: 4,
+      h: 7,
       isResizable: false,
       isDraggable: true,
       preventCollision: true,
