@@ -28,3 +28,26 @@
   border-radius: 5px;
   margin-bottom: 10px;
 }
+
+/* Add this to your CSS file */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulsating-logo {
+  width: 50px; /* Adjust the size as needed */
+  height: 50px; /* Adjust the size as needed */
+  background-color: #4CAF50; /* Replace with your logo's color or background */
+  border-radius: 50%; /* To make it circular */
+  display: inline-block;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
