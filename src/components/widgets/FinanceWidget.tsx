@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import {
+  ComposedChart,
   BarChart,
   Bar,
   XAxis,
@@ -139,7 +140,7 @@ const FinanceWidget: React.FC = () => {
           {/* Right Column (BarChart) */}
           <div style={{ flex: 5 }}>
             <ResponsiveContainer width="100%" height={200}>
-              <BarChart data={data} barSize={20}>
+              <ComposedChart data={data} barSize={20}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis
@@ -179,7 +180,17 @@ const FinanceWidget: React.FC = () => {
                     );
                   })}
                 </Bar>
-              </BarChart>
+                <Line
+                  type="linear"
+                  dataKey="balance"
+                  name="Balance"
+                  stroke="#0000FF"
+                  strokeDasharray="14 14"
+                  strokeWidth={2}
+                  dot={{ fill: "#0000FF", r: 4 }}
+                  activeDot={{ r: 6 }}
+                />
+              </ComposedChart>
             </ResponsiveContainer>
           </div>
         </div>
