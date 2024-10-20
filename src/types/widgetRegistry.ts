@@ -92,7 +92,7 @@ export const widgetRegistry = {
       i: "loan",
       x: 0,
       y: 0,
-      w: 3,
+      w: 5,
       h: 7,
       isResizable: false,
       isDraggable: true,

@@ -14,8 +14,8 @@ const LoanWidget: React.FC = () => {
    const token = "jvkhgfjvjbj";
   // Mocked data
   const answer = {
-    short_answer: "Your loan application was likely approved because your credit duration is favorable and your income is adequate compared to your expenses. Focus on maintaining a stable income and improving your credit duration.",
-    detailed_answer: "The model predicted that you are not likely to default on your loan primarily because your savings account balance is high, which indicates financial stability. Additionally, your credit duration is below 40 months, which is viewed positively. To improve your chances for future applications, ensure you maintain or increase your income levels, reduce any high expenses, and consider building a longer credit history. Also, being mindful of your spending habits can help reinforce your creditworthiness.",
+    short_answer: "Your loan application is likely to be approved because your credit duration is favorable and your income is adequate compared to your expenses. Focus on maintaining a stable income and improving your credit duration.",
+    detailed_answer: "You have not been determined to be likely to default on your loan primarily because your savings account balance is high, which indicates financial stability. Additionally, your credit duration is below 40 months, which is viewed positively. To improve your chances for future applications, ensure you maintain or increase your income levels, reduce any high expenses, and consider building a longer credit history. Also, being mindful of your spending habits can help reinforce your creditworthiness.",
     status: true
   };
 
@@ -105,7 +105,7 @@ const LoanWidget: React.FC = () => {
           {answer.status ? "High chance of approval": "Low chance of approval"}
         </p>
         
-        {/* <p>{answer.short_answer}</p> */}
+        <p>{answer.short_answer}</p>
         {/* "See details" link */}
         <a
           className="text-blue-500 cursor-pointer"
