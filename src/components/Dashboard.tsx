@@ -27,7 +27,7 @@ const Dashboard: React.FC<DashboardProps> = ({
     widgets.map((widget) => ({ ...widget.layout, i: widget.id }))
   );
   const [draggingWidget, setDraggingWidget] = useState<null | string>(null); // To visualize dragging
-  const cols: number = 19;
+  const cols: number = 12;
   // Use Drop to handle dropping widgets from the WidgetMenu
   const [{ isOver }, drop] = useDrop({
     accept: "WIDGET",

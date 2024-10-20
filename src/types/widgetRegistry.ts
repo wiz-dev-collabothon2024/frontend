@@ -54,9 +54,11 @@ export const widgetRegistry = {
       i: "status",
       x: 0,
       y: 0,
-      w: 3.4,
+      w: 4,
       h: 5.5,
       isResizable: false,
+      isDraggable: true,
+      preventCollision: true,
     },
   },
   forex: {
