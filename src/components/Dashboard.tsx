@@ -91,6 +91,19 @@ const Dashboard: React.FC<DashboardProps> = ({
     }),
   });
 
+  const disableDraggableOnHover = (id: string, disable: boolean) => {
+    setLayout((prevLayout) =>
+      prevLayout.map((widgetLayout) =>
+        widgetLayout.i === id
+          ? { ...widgetLayout, isDraggable: !disable }
+          : widgetLayout
+      )
+    );
+  };
+  const handleWidgetRemove = (id: string) => {
+    onWidgetRemove(id); // Remove the widget
+  };
+
   const handleLayoutChange = (newLayout: Layout[]) => {
     setLayout(newLayout);
     onLayoutChange(newLayout); // Update layout in the parent
@@ -121,7 +134,15 @@ const Dashboard: React.FC<DashboardProps> = ({
         preventCollision={false}
       >
         {widgets.map(({ id, layout, component: WidgetComponent }) => (
-          <div key={id} data-grid={layout} className="relative">
+          <div
+            key={id}
+            data-grid={{
+              ...layout,
+              isDraggable: isMenuVisible, // Dynamically set draggable based on menu visibility
+              isResizable: isMenuVisible, // Handle resizing
+            }}
+            className="relative"
+          >
             <Widget>
               <WidgetComponent />
               {/* Show delete button only when the menu is visible */}
